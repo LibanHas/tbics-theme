@@ -1,0 +1,16 @@
+{
+  "name": "tbics",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build": "sass scss/style.scss style.css",
+    "dev": "sass --watch scss/style.scss:style.css"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.89.2"
+  }
+}
