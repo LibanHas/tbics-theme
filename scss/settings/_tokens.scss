@@ -1,0 +1,98 @@
+// ============================================================================
+// TOKENS — design constants used across the theme
+// Build-time (Sass) tokens + run-time (CSS variables)
+// ============================================================================
+
+// ---------- Sass tokens (compile-time) ----------
+$nav-break:        1030px !default;
+$da-tab-break:     992px  !default;  // domestic access tabs
+$themes-gap:       24px   !default;
+$themes-gap-lg:    28px   !default;
+$themes-break:     900px  !default;
+
+// Motion
+$ease-out-3: cubic-bezier(.22,1,.36,1) !default;
+$ease-inout: cubic-bezier(.4,0,.2,1)   !default;
+$dur-fast:   .18s !default;
+$dur-med:    .26s !default;
+$dur-slow:   .36s !default;
+
+// Z-index scale
+$z-nav:      1030 !default; // > bootstrap fixed top
+$z-dropdown: 1100 !default;
+$z-overlay:  1200 !default;
+$z-modal:    1300 !default;
+
+// ---------- CSS Custom Properties (run-time) ----------
+:root{
+  /* Brand palette */
+  --brand-primary: #013f87; /* TBICS blue */
+  --brand-cte:     #2f67b2;
+  --brand-ai3l:    #00647E;
+  --brand-meta:    #c49a2c;
+  --brand-iclea:   #d0666f;
+
+  /* Surfaces & text */
+  --page-bg:   #DDEBF7;
+  --surface:   #ffffff;
+  --surface-2: #FAF5EE; /* cream table background */
+  --text:      #1f2d3d;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px  rgba(0,0,0,.06);
+  --shadow-md: 0 6px 18px rgba(0,0,0,.08);
+  --shadow-lg: 0 10px 24px rgba(0,0,0,.12);
+
+  /* Radii */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   20px;
+  --radius-pill: 999px;
+
+  /* Spacing (light scale) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+
+  /* Navbar tokens (used by navbar.scss) */
+  --tbics-solid: var(--brand-primary);
+  --nav-pad-y:   14px;  /* animated */
+  --logo-h:      60px;
+  --nav-offset:  72px; 
+
+  /* Hero glass defaults (used by hero-glass & hero-banner) */
+  --hero-glass-bg:     rgba(1, 27, 64, .28);
+  --hero-glass-radius: 16px;
+  --hero-glass-pad:    1rem 1.5rem 1.1rem;
+  --hero-glass-blur:   4px;
+  --hero-glass-sat:    130%;
+}
+
+/* Brand scopes (used by cards, pills, hero-glass--brand) */
+.is-cte  { --brand:#2f67b2; --bg1: rgba(47,103,178,.30);  --bg2: rgba(47,103,178,.18); }
+.is-ai3l { --brand:#00647E; --bg1: rgb(0 100 126 / 0.32); --bg2: rgb(0 100 126 / 0.18); }
+.is-meta { --brand:#c49a2c; --bg1: rgba(196,154,44,.30);  --bg2: rgba(196,154,44,.18); }
+.is-iclea{ --brand:#d0666f; --bg1: rgba(208,102,111,.30); --bg2: rgba(208,102,111,.18); }
+
+/* Default brand-tinted glass anywhere */
+.hero-glass--brand{
+  --hero-glass-bg: color-mix(in oklab, var(--brand, var(--brand-primary)), #000 12%);
+  color:#fff;
+}
+
+@media (prefers-color-scheme: dark){
+  :root{
+    --page-bg: #DDEBF7;
+    --surface: #ffffff;
+    --text:    #1f2d3d;
+    /* optional: keep the lighter shadow set */
+    --shadow-sm: 0 2px 8px rgba(0,0,0,.06);
+    --shadow-md: 0 6px 18px rgba(0,0,0,.08);
+    --shadow-lg: 0 10px 24px rgba(0,0,0,.12);
+  }
+}
+

@@ -1,0 +1,301 @@
+// ============================================================================
+// NAVBAR — TBICS header, collapse at 1030px, hover dropdowns on desktop
+// ============================================================================
+
+@use "../settings/tokens" as *;
+@use "../settings/breakpoints" as *; // $nav-break
+
+// Base container / sizing
+#main-nav {
+  width: 100%;
+  z-index: 1000;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+
+/* Static front page OR blog home starts transparent */
+body.home #main-nav,
+body.front-page #main-nav { background-color: transparent; }
+
+/* Everything else starts solid */
+body:not(.home):not(.front-page) #main-nav { background-color: #013f87; }
+
+/* Tokens (defined in settings/_tokens.scss)
+:root{
+  --tbics-solid: #013f87;
+  --nav-pad-y: 14px;
+  --logo-h: 60px;
+}
+*/
+
+/* SCROLLED state (JS adds .is-scrolled) */
+#main-nav.tbics-nav.is-scrolled{
+  background-color: #013f87;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+}
+
+/* HOME/blog HOME: force fully transparent until scrolled */
+body.home  #main-nav.tbics-nav.navbar:not(.is-scrolled),
+body.front-page #main-nav.tbics-nav.navbar:not(.is-scrolled){
+  background-color: transparent !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+/* Non-home: solid */
+body:not(.home):not(.front-page) #main-nav.tbics-nav{
+  background-color: var(--tbics-solid);
+  --nav-pad-y: 14px;
+  --logo-h: 60px;
+}
+
+/* Smaller logo on narrow screens (home state) */
+@media (max-width: 1030px){
+  body.home #main-nav.tbics-nav{
+    --nav-pad-y: 12px;
+    --logo-h: 40px; /* mobile */
+  }
+}
+
+/* Respect accessibility settings */
+@media (prefers-reduced-motion: reduce){
+  #main-nav.tbics-nav{ transition: none; }
+  #main-nav .navbar-brand img{ transition: none; }
+}
+
+/* Layout */
+#main-nav.tbics-nav.navbar{
+  height: auto !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding-inline: 0 !important;
+  padding-block: var(--nav-pad-y, 14px) !important; /* animates */
+  transition:
+    background-color .36s cubic-bezier(.22,1,.36,1),
+    box-shadow       .36s cubic-bezier(.22,1,.36,1),
+    padding          .26s cubic-bezier(.22,1,.36,1),
+    backdrop-filter  .36s cubic-bezier(.22,1,.36,1),
+    -webkit-backdrop-filter .36s cubic-bezier(.22,1,.36,1);
+  will-change: background-color, box-shadow, padding, backdrop-filter;
+}
+
+@media (max-width: 1500px),
+       (max-width: 1030px),
+       (max-width: 480px){
+  #main-nav.tbics-nav.navbar{ height: auto !important; }
+}
+
+/* Match/beat Bootstrap fixed-top z-index */
+#main-nav.tbics-nav{ z-index: 1030; }
+
+/* Internal anchors won’t hide beneath the bar */
+[id]{ scroll-margin-top: calc(var(--nav-offset, 72px) + 12px); }
+
+/* Links & spacing */
+#main-nav .navbar-nav { gap: 1rem; }
+#main-nav .nav-link {
+  margin-right: 0 !important;
+  color: #fff !important;
+  &:hover { color: #ddebf7 !important; }
+}
+
+/* ===== Desktop (≥ 1030px): keep expanded ===== */
+@media (min-width: $nav-break + 0.02px) {
+  .navbar-toggler { display: none !important; }
+  #main-nav .navbar-collapse { display: flex !important; }
+  #main-nav .navbar-nav {
+    flex-direction: row;
+    align-items: center !important;
+    margin-left: 16rem !important; /* your original offset */
+  }
+}
+
+/* ===== Mobile & mid (≤ 1030px): collapse to hamburger ===== */
+@media (max-width: $nav-break) {
+  :root { --nav-offset: 104px; }
+  .navbar-toggler {
+    display: inline-flex !important;
+    margin-left: auto;
+    border: none;
+    background: none;
+    box-shadow: none;
+  }
+
+  /* Force collapsed state under 1030px even if markup has navbar-expand-lg */
+  #main-nav .navbar-collapse { display: none !important; }
+  #main-nav .navbar-collapse.show { display: block !important; }
+
+  #main-nav .navbar-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: .75rem;
+    margin-left: 0 !important;
+    padding: .75rem 0;
+  }
+}
+
+/* Brand block */
+#main-nav .navbar-brand {
+  margin-right: auto !important;
+  padding: 0;
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Make the image scale to the anchor size */
+#main-nav .navbar-brand img,
+#main-nav .navbar-brand .custom-logo {
+  height: var(--logo-h, 60px);
+  max-height: var(--logo-h, 60px);
+  width: auto;
+  transition: height .26s cubic-bezier(.22,1,.36,1), transform .26s cubic-bezier(.22,1,.36,1);
+  transform-origin: left center;
+}
+
+/* Smaller logo on mobile */
+@media (max-width: 1030px) {
+  #main-nav .navbar-brand img,
+  #main-nav .navbar-brand .custom-logo {
+    height: var(--logo-h, 40px);
+    max-height: var(--logo-h, 40px);
+  }
+}
+
+/* (previous behavior) hide brand on HOME only under 768px */
+@media (max-width: 768px) {
+  body.home #main-nav .navbar-brand { display: none; }
+}
+
+/* Desktop ( > 1030px ): open on hover + keyboard focus */
+@media (min-width: 1031px) {
+  #main-nav .navbar-nav .dropdown:hover > .dropdown-menu,
+  #main-nav .navbar-nav .dropdown:focus-within > .dropdown-menu {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+  }
+
+  #main-nav .dropdown-menu {
+    display: none;
+    margin-top: .35rem;
+    border-radius: .5rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,.15);
+    z-index: 1100; /* above hero image on the home page */
+  }
+
+  /* Optional: keep parent link styled as "active" while menu is open */
+  #main-nav .navbar-nav .dropdown:hover > .nav-link,
+  #main-nav .navbar-nav .dropdown:focus-within > .nav-link {
+    color: #fff;
+  }
+}
+
+/* Align nav + make a mobile row with: brand | mobile title | hamburger */
+#main-nav.tbics-nav.navbar{
+  padding-inline: 0 !important; /* align with containers */
+}
+
+@media (max-width: $nav-break){
+  #main-nav .container{
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;               /* allow pill to move to its own row */
+  }
+  .tbics-mobile-title{
+    order: 1;
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    margin-left: .5rem;
+    font-weight: 700;
+    line-height: 1.05;
+    color: #fff;
+    font-size: clamp(14px, 4vw, 18px);
+    .line1, .line2{ white-space: nowrap; }
+  }
+  /* push burger to the far right */
+  #main-nav .navbar-toggler{ order: 2; margin-left: auto; }
+}
+
+/* --------------------------- */
+/* Anniversary pill IN NAVBAR  */
+/* --------------------------- */
+
+.nav-anniv { display: none; }
+
+@media (max-width: $nav-break){
+  .nav-anniv{
+    order: 3;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: .15rem;
+  }
+  .nav-anniv .anniv-wrap{ margin: 0; }
+  .nav-anniv .anniv-pill{
+    font-size: clamp(12px, 3.3vw, 14px);
+    line-height: 1;
+    padding: .28rem .6rem;
+    gap: .25rem;
+    border-radius: 999px;
+    box-shadow:
+      inset 0 -1px 0 rgba(0,0,0,.12),
+      0 3px 10px rgba(0,0,0,.16);
+  }
+  .nav-anniv .anniv-star{ font-size: .9em; }
+  .nav-anniv .sparkle   { font-size: 12px; }
+  .nav-anniv .anniv-wrap::before { inset: -10px -12px; }
+}
+
+@media (min-width: $nav-break + 0.02px){
+  .nav-anniv{ display: none !important; }
+}
+
+/* Hide the mobile title on desktop */
+@media (min-width: $nav-break + 0.02px){
+  .tbics-mobile-title{ display: none !important; }
+}
+
+/* Avoid duplicate headings on mobile: hide the big hero H1 only on small */
+@media (max-width: $nav-break){
+  .hero-content .hero-title{ display: none; }
+}
+
+/* Custom hamburger icon (keeps your white bars) */
+body.home .navbar-toggler-icon,
+body:not(.home) .navbar-toggler-icon {
+  background: none;
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background-color: #fff; /* middle bar */
+  display: inline-block;
+  transition: all 0.3s ease;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    width: 24px;
+    height: 2px;
+    background-color: #fff;
+    transition: all 0.3s ease;
+  }
+
+  &::before { top: -8px; } /* top bar */
+  &::after  { top:  8px; } /* bottom bar */
+}

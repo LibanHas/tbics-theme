@@ -72,7 +72,7 @@ $hero_lead = get_field('hero_lead') ?: '';
             <p class="text-center" style="margin-top:1.25rem;">
               <a class="btn-brand <?php echo esc_attr($brand_modifier); ?>" target="_blank" rel="noopener"
                  href="https://eduhk.ap.panopto.com/Panopto/Pages/Viewer.aspx?id=236b63f6-0df3-48cc-a6b1-b341004cf692">
-                Watch: Intro to AI-CTE-STEM
+                Watch the 10-Year CTE-STEM Anniversary Video
               </a>
             </p>
           </section>
@@ -112,25 +112,6 @@ $hero_lead = get_field('hero_lead') ?: '';
                 <p class="role-affil">University of Zagreb, Croatia</p>
               </article>
             </div>
-
-            <!-- Steering Committee -->
-            <div class="org-roles org-roles--force-3 org-roles--center" style="margin-top:2rem;">
-              <article class="org-role-card">
-                <p class="role-label">Steering Committee Chair</p>
-                <h5 class="role-name">Tak-Wai Chan</h5>
-                <p class="role-affil">National Central University, Taiwan</p>
-              </article>
-              <article class="org-role-card">
-                <p class="role-label">Steering Committee Co-Chair</p>
-                <h5 class="role-name">Siu-Cheung Kong</h5>
-                <p class="role-affil">The Education University of Hong Kong</p>
-              </article>
-              <article class="org-role-card">
-                <p class="role-label">Steering Committee Co-Chair</p>
-                <h5 class="role-name">Chee-Kit Looi</h5>
-                <p class="role-affil">The Education University of Hong Kong</p>
-              </article>
-            </div>
           </section>
 
           <!-- Themes of Interest -->
@@ -141,55 +122,55 @@ $hero_lead = get_field('hero_lead') ?: '';
               <article class="theme-card">
                 <h6>Foundations, Integration &amp; Infrastructure</h6>
                 <ul>
-                  <li>Computational Thinking and its Key Elements</li>
-                  <li>Computational Thinking as Method</li>
-                  <li>STEM and Interdisciplinary Integration</li>
-                  <li>Open-Source Software and Hardware for CT and STEM Education</li>
+                  <li>AI and Computational Thinking and its Key Elements</li>
+                  <li>AI and Computational Thinking as Method</li>
+                  <li>AI and STEM and Interdisciplinary Integration</li>
+                  <li>AI and Open-Source Software and Hardware for CT and STEM Education</li>
                 </ul>
               </article>
 
               <article class="theme-card">
                 <h6>K–12 Classroom</h6>
                 <ul>
-                  <li>Computational Thinking and Unplugged Activities in K–12</li>
-                  <li>Computational Thinking and Coding Education in K–12</li>
-                  <li>Computational Thinking and Subject Learning and Teaching in K–12</li>
+                  <li>AI and Computational Thinking and Unplugged Activities in K–12</li>
+                  <li>AI and Computational Thinking and Coding Education in K–12</li>
+                  <li>AI and Computational Thinking and Subject Learning and Teaching in K–12</li>
                 </ul>
               </article>
 
               <article class="theme-card">
                 <h6>Higher Education &amp; Teacher Development</h6>
                 <ul>
-                  <li>Computational Thinking and Teacher Development</li>
-                  <li>Computational Thinking Development in Higher Education</li>
-                  <li>Computational Thinking and Evaluation</li>
+                  <li>AI and Computational Thinking and Teacher Development</li>
+                  <li>AI and Computational Thinking Development in Higher Education</li>
+                  <li>AI and Computational Thinking and Evaluation</li>
                 </ul>
               </article>
 
               <article class="theme-card">
                 <h6>Modalities &amp; Context</h6>
                 <ul>
-                  <li>Computational Thinking and STEM/STEAM Education</li>
-                  <li>Computational Thinking and Non-formal Learning</li>
-                  <li>Computational Thinking and IoT</li>
-                  <li>Computational Thinking and Data Science</li>
-                  <li>Computational Thinking and Artificial Intelligence Education</li>
+                  <li>AI and Computational Thinking and STEM/STEAM Education</li>
+                  <li>AI and Computational Thinking and Non-formal Learning</li>
+                  <li>AI and Computational Thinking and IoT</li>
+                  <li>AI and Computational Thinking and Data Science</li>
+                  <li>AI and Computational Thinking and Artificial Intelligence Education</li>
                 </ul>
               </article>
 
               <article class="theme-card">
                 <h6>Inclusive &amp; Psychology</h6>
                 <ul>
-                  <li>Computational Thinking and Special Education Needs</li>
-                  <li>Computational Thinking and Psychological Studies</li>
+                  <li>AI and Computational Thinking and Special Education Needs</li>
+                  <li>AI and Computational Thinking and Psychological Studies</li>
                 </ul>
               </article>
 
               <article class="theme-card">
                 <h6>Policy &amp; General</h6>
                 <ul>
-                  <li>Computational Thinking in Educational Policy</li>
-                  <li>General Submission to Computational Thinking Education</li>
+                  <li>AI and Computational Thinking in Educational Policy</li>
+                  <li>AI and General Submission to Computational Thinking Education</li>
                 </ul>
               </article>
             </div>
@@ -206,32 +187,61 @@ $hero_lead = get_field('hero_lead') ?: '';
               page for deadlines and registration details.
             </p>
           </section>
+<!-- Steering Committee -->
+<section class="cfp-section">
+  <h4 class="section-title">Steering Committee</h4>
+
+  <div class="org-roles org-roles--grid-3">
+    <article class="org-role-card">
+      <p class="role-label">Steering Committee Chair</p>
+      <h5 class="role-name">Tak-Wai Chan</h5>
+      <p class="role-affil">National Central University, Taiwan</p>
+    </article>
+    <article class="org-role-card">
+      <p class="role-label">Steering Committee Co-Chair</p>
+      <h5 class="role-name">Siu-Cheung Kong</h5>
+      <p class="role-affil">The Education University of Hong Kong</p>
+    </article>
+    <article class="org-role-card">
+      <p class="role-label">Steering Committee Co-Chair</p>
+      <h5 class="role-name">Chee-Kit Looi</h5>
+      <p class="role-affil">The Education University of Hong Kong</p>
+    </article>
+  </div>
+  <h5 class="org-subtitle">Members</h5>
+  <ul class="org-members two-col">
+    <li><span class="name">Hiroaki Ogata</span><span class="affil">Kyoto University, Japan</span></li>
+    <li><span class="name">Weiqin Chen</span><span class="affil">Oslo Metropolitan University, Norway</span></li>
+    <li><span class="name">Jon Mason</span><span class="affil">Charles Darwin University, Australia</span></li>
+    <li><span class="name">JU-LING SHIH</span><span class="affil">National Central University, Taiwan</span></li>
+    <li><span class="name">Ting-Chia Hsu</span><span class="affil">National Taiwan Normal University, Taiwan</span></li>
+  </ul>
+</section>
 
           <!-- Contact -->
           <section class="cfp-section is-cte" aria-labelledby="contact-title">
-  <h4 id="contact-title" class="section-title">Contact</h4>
+            <h4 id="contact-title" class="section-title">Contact</h4>
 
-  <div class="contact-card is-cte">
-    <div class="contact-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
-        <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/>
-      </svg>
-    </div>
+            <div class="contact-card is-cte">
+              <div class="contact-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="24" height="24" focusable="false">
+                  <path fill="currentColor" d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z"/>
+                </svg>
+              </div>
 
-    <div class="contact-copy">
-      <p class="eyebrow">Questions about AI-CTE-STEM 2026?</p>
-      <p class="micro">For questions regarding submissions, please contact the organizing committee.</p>
+              <div class="contact-copy">
+                <p class="eyebrow">Questions about AI-CTE-STEM 2026?</p>
+                <p class="micro">For questions regarding submissions, please contact the organizing committee.</p>
 
-      <p class="contact-actions">
-        <a class="btn-brand is-cte"
-           href="mailto:ckhsu@ntnu.edu.tw?subject=AI-CTE-STEM%202026%20%E2%80%94%20CFP%20Question">
-          ckhsu@ntnu.edu.tw
-        </a>
-      </p>
-    </div>
-  </div>
-</section>
-
+                <p class="contact-actions">
+                  <a class="btn-brand is-cte"
+                     href="mailto:ckhsu@ntnu.edu.tw?subject=AI-CTE-STEM%202026%20%E2%80%94%20CFP%20Question">
+                    ckhsu@ntnu.edu.tw
+                  </a>
+                </p>
+              </div>
+            </div>
+          </section>
 
         </div>
       </div>

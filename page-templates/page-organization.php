@@ -15,21 +15,12 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
 ?>
 <main id="about-tbics" class="tbics-page site-main" role="main">
 
-  <!-- Hero -->
-  <!-- <section class="page-hero org-hero-banner"
-           style="background-image:url('<?php echo esc_url($bg_image); ?>'); background-position:center 35%;">
-    <div class="<?php echo esc_attr($container); ?> text-center text-white">
-      <div class="hero-glass">
-        <h1 class="mb-2"><?php the_title(); ?></h1>
-        <p class="lead mb-0">APSCE TBICS Festival of Learning 2026 — Organizing Committee &amp; Governance</p>
-      </div>
-    </div>
-  </section> -->
+
   <section class="page-hero page-hero-banner" style="background-image: url('<?php echo esc_url($bg_image); ?>'); background-position: center 35%;">
-    <div class="<?php echo esc_attr($container); ?> text-center text-white">
-      <div class="hero-glass">
+    <div class="<?php echo esc_attr($container); ?> text-center ">
+      <div class="hero-glass text-white">
         <h1 class="hero-split">
-          <span class="kicker">APSCE TBICS Festival of Learning 2026</span>
+          <span class="kicker">APSCE TBICS<br>Festival of Learning 2026</span>
           <span class="title">Organizing Committee &amp; Governance</span>
         </h1>
       </div>
@@ -74,7 +65,7 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
     
 
     <article class="subconf-block is-cte">
-      <span class="conf-tag">AI-CTE-STEM</span>
+      <span class="conf-tag">AI-CTE-STEM 2026</span>
       <div class="chair-card">
         <p class="role-label">Program Chair</p>
         <h5 class="role-name">Ting-Chia Hsu</h5>
@@ -83,7 +74,7 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
     </article>
 
     <article class="subconf-block is-ai3l">
-      <span class="conf-tag">AI3L (ICFULL)</span>
+      <span class="conf-tag">AI3L (ICFULL) 2026</span>
       <div class="chair-card">
         <p class="role-label">Program Chair</p>
         <h5 class="role-name">Jie-Chi Yang</h5>
@@ -92,16 +83,16 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
     </article>
 
     <article class="subconf-block is-meta">
-      <span class="conf-tag">MetaACES</span>
+      <span class="conf-tag">AI-MetaACES 2026</span>
       <div class="chair-card">
         <p class="role-label">Program Chair</p>
-        <h5 class="role-name">Yusuke Hayashi</h5>
-        <p class="role-affil">Hiroshima University, Japan</p>
+        <h5 class="role-name">Xuesong Michael Zhai</h5>
+        <p class="role-affil">Zhejiang University, China</p>
       </div>
     </article>
 
     <article class="subconf-block is-iclea">
-      <span class="conf-tag">ICLEA</span>
+      <span class="conf-tag">ICLEA 2026</span>
       <div class="chair-card">
         <p class="role-label">Program Chair</p>
         <h5 class="role-name">Elizabeth Koh</h5>

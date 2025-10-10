@@ -1,0 +1,151 @@
+// ============================================================================
+// HEADINGS — section title rules, ruled H4 utility, kicker/title helpers
+// Matches the original selectors/values (no behavioral changes).
+// ============================================================================
+
+// ========== Section title with red rules ====================================
+.section-title{
+    position: relative;
+    color: #000;
+    display: block;
+    inline-size: max-content;         /* shrink to text width */
+    max-inline-size: 100%;
+    margin: clamp(10px, 2vw, 14px) auto clamp(14px, 2.2vw, 18px);
+    padding-inline: .75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    font-size: clamp(1.25rem, 2.2vw, 1.75rem);
+  }
+  .section-title::before,
+  .section-title::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    inline-size: 120px;               /* width */
+    block-size: 2px;                  /* height */
+    background: #c94b4b;
+    border-radius: 2px;
+  }
+  .section-title::before{ right: 100%; margin-right: 12px; }
+  .section-title::after { left: 100%;  margin-left: 12px; }
+  
+  /* Phones: flex row, lines inside heading width (no overflow) */
+  @media (max-width: 600px){
+    .section-title{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      inline-size: 100%;
+      padding-inline: 12px;
+      font-size: clamp(1.1rem, 5.2vw, 1.35rem);
+      overflow: clip;
+    }
+    .section-title::before,
+    .section-title::after{
+      position: static;
+      transform: none;
+      margin: 0;
+      inline-size: auto;
+      block-size: 2px;
+      flex: 1 1 64px;
+      display: block;
+    }
+  }
+  
+  /* ===== Venue page variant (as in original: later override) ===== */
+  .section-title{
+    position: relative;
+    display: block;
+    width: max-content;
+    margin: 0 auto .5rem;
+    padding: 3.5rem .75rem;
+  }
+  .section-title::before,
+  .section-title::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 120px;
+    height: 2px;
+    background: #c94b4b;
+  }
+  .section-title::before { right: 100%; margin-right: 12px; }
+  .section-title::after  { left: 100%;  margin-left: 12px; }
+  
+  // ========== Global ruled H4 utility =========================================
+  h4.section-rule{
+    --rule-width: 720px;
+    --rule-color: #c94b4b;
+  
+    display: flex; align-items: center; justify-content: center;
+    gap: 12px;
+    width: min(var(--rule-width), 100%);
+    margin: 5rem auto 5rem;
+    line-height: 1.2;
+  
+    &::before,
+    &::after{
+      content: "";
+      flex: 1 1 0;
+      height: 3px;
+      background: var(--rule-color);
+      border-radius: 2px;
+    }
+  
+    @media (max-width: 991.98px){ --rule-width: 600px; }
+    @media (max-width: 576px){    --rule-width: 100%; gap: 10px; }
+  
+    &.rule-wide   { --rule-width: 840px; }
+    &.rule-narrow { --rule-width: 640px; }
+    &.rule-blue   { --rule-color: #013f87; }
+  }
+  
+  // ========== Kicker / title inline helpers (CFP intro row) ===================
+  .cfp-intro-title{
+    display: inline-flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: .55rem .65rem;
+    flex-wrap: wrap;
+    text-align: center;
+    margin: 0 auto 1rem;
+    max-width: 92ch;
+    position: relative;
+  }
+  
+  /* tiny brand dot */
+  .cfp-intro-title .label-dot{
+    width: .6rem; height: .6rem; border-radius: 50%;
+    background: var(--brand, #c94b4b);
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand, #c94b4b), #fff 70%);
+    transform: translateY(1px);
+  }
+  
+  /* lightweight kicker */
+  .kicker-inline{
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    font-size: clamp(12px, 1.6vw, 14px);
+    color: color-mix(in oklab, var(--brand, #c94b4b), #000 15%);
+    opacity: .9;
+  }
+  
+  /* main title inline, wraps safely */
+  .title-inline{
+    display: inline;
+    margin: 0;
+    font-weight: 800;
+    line-height: 1.15;
+    font-size: clamp(20px, 3.8vw, 34px);
+    letter-spacing: .2px;
+    color: #14212b;
+  }
+  
+  @media (max-width: 720px){
+    .cfp-intro-title{ gap: .4rem .5rem; max-width: 80ch; }
+    .title-inline{ display: block; font-size: clamp(20px, 6vw, 26px); }
+  }
+  

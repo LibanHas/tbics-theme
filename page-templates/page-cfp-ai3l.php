@@ -123,6 +123,20 @@ $hero_lead = get_field('hero_lead') ?: 'Formerly ICFULL';
             </ul>
           </section>
 
+          <!-- Call for Symposia (CTA) -->
+        <section class="cfp-section">
+          <h4 class="section-title">Call for Symposia</h4>
+          <p class="mb-2">
+          AI3L 2026 invites submissions of symposium proposals. See the full call and submission details below.
+          </p>
+          <div class="text-center mt-5 mb-4">
+            <a class="btn-brand"
+              href="<?php echo esc_url( home_url( '/ai3l-2026/call-for-symposia/' ) ); ?>">
+              Read the Call for Symposia
+            </a>
+          </div>
+        </section>
+
           <!-- Conference Organizers -->
           <section class="cfp-section">
             <h4 class="section-title">Conference Organizers</h4>

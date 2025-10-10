@@ -1,0 +1,267 @@
+// pages/_home.scss
+// Home / Landing page styles only
+// (Components like navbar, cards, buttons, hero-glass, and gallery live in /components)
+
+// --------------------------------------------------
+// Hero section
+// --------------------------------------------------
+.hero-section {
+    position: relative;
+    min-height: 100vh;
+    background-image: url('./img/kumamoto_castle.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    color: #fff;
+  
+    display: flex;
+    align-items: flex-start;  // align content to top
+    justify-content: flex-start; // align content to left
+    padding: 4rem 2rem;
+  
+    .hero-content {
+      max-width: 600px;
+      z-index: 2;
+      text-align: left;
+      margin-left: 8rem;
+      margin-top: 7rem;
+    }
+  
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 150px;
+      background: linear-gradient(
+        to bottom,
+        rgba(221, 235, 247, 0) 0%,
+        #ddebf7 100%
+      );
+      z-index: 1;
+    }
+  
+    .hero-title    { font-weight: 600; font-size: 48px; }
+    .hero-location { font-size: 36px; margin-top: 1rem; }
+    .hero-date     { font-size: 36px; }
+  }
+  
+  /* Large tablet / small desktop tweaks */
+  @media (max-width: 1500px) {
+    .hero-section {
+      .hero-title { font-size: 38px; }
+      .hero-location,
+      .hero-date { font-size: 28px; }
+  
+      .hero-content {
+        margin-left: 4rem;
+        margin-top: 3rem;
+      }
+    }
+  }
+  
+  /* Custom nav breakpoint kept in navbar partial; only hero + page sections here */
+  @media (max-width: 1030px) {
+    .hero-section {
+      .hero-title { font-size: 30px; }
+      .hero-location,
+      .hero-date { font-size: 22px; }
+  
+      .hero-content {
+        margin-left: 2rem;
+        margin-top: 2rem;
+      }
+    }
+  
+    /* Optional home blocks that appear near hero on medium screens */
+    .welcome-section {
+      padding: 2rem 1.2rem;
+      text-align: center;
+  
+      .welcome-title { font-size: 1.5rem; }
+    }
+  
+    .custom-footer {
+      min-height: 280px;
+  
+      .footer-title   { font-size: 1.2rem; text-align: center; }
+      .footer-location,
+      .footer-dates,
+      .footer-copy    { font-size: 0.9rem; text-align: center; }
+    }
+  }
+  
+  /* Tablets */
+  @media (max-width: 768px) {
+    .hero-section {
+      padding: 2rem 1rem;
+      align-items: flex-start;
+      justify-content: flex-start;
+  
+      .hero-content {
+        margin-left: 1rem;
+        margin-top: 1rem;
+        max-width: 100%;
+      }
+      .hero-title { font-size: 28px; }
+      .hero-location,
+      .hero-date { font-size: 18px; }
+    }
+  }
+  
+  /* Phones */
+  @media (max-width: 480px) {
+    .hero-section {
+      min-height: 80vh;
+      padding: 2rem 1rem;
+  
+      .hero-content {
+        margin-left: 0.5rem;
+        margin-top: 0;
+        text-align: left;
+      }
+  
+      .hero-title    { font-size: 22px; line-height: 1.3; }
+      .hero-location,
+      .hero-date     { font-size: 16px; }
+    }
+  
+    .welcome-section {
+      padding: 1.5rem 1rem;
+      text-align: left;
+  
+      .welcome-title   { font-size: 1.3rem; }
+      .welcome-subtitle{ font-size: 1rem; }
+      .welcome-content { font-size: 0.95rem; }
+    }
+  }
+  
+  // --------------------------------------------------
+  // Home Intro panel (glass panel + CTAs)
+  // --------------------------------------------------
+  .home-intro{
+    /* uses body bg (#DDEBF7) */
+    background: transparent;
+    padding: 7.5rem 1rem 3.25rem;
+  }
+  
+  .intro-panel{
+    max-width: 940px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 2rem 1.5rem 2.25rem;
+    border-radius: 20px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.64)),
+      radial-gradient(120% 120% at 0% 0%, rgba(1,63,135,.08), transparent 60%);
+    border: 1px solid rgba(1,63,135,.18);
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    backdrop-filter: blur(4px) saturate(130%);
+    -webkit-backdrop-filter: blur(4px) saturate(130%);
+  }
+  
+  .intro-heading.ruled{
+    display:flex; align-items:center; justify-content:center; gap:12px;
+    font-weight:800; margin:0 0 1rem; line-height:1.2;
+  
+    &::before,
+    &::after{
+      content:""; flex:1 1 0; height:3px; background:#c94b4b; border-radius:2px;
+      max-width:220px;
+    }
+  }
+  
+  .intro-badge{
+    width: 220px; max-width: 60vw; height:auto; padding-top: 3rem; padding-bottom: 3rem;
+    display:block; margin: .75rem auto 1.25rem;
+    filter: drop-shadow(0 6px 16px rgba(0,0,0,.08));
+  }
+  
+  .intro-body{ text-align: left; max-width: 960px; margin: 0 auto; }
+  
+  .intro-note{
+    background:#fff; border:1px solid rgba(1,63,135,.14);
+    padding:.75rem 1rem; border-radius:12px; margin:1rem 0 1.25rem;
+  }
+  
+  .intro-sub{ font-size:1.05rem; font-weight:800; margin:1rem 0 .5rem; }
+  .intro-list{ margin:0 0 1.25rem; padding-left:1.25rem; }
+  .intro-list li{ margin:.45rem 0; }
+  
+  /* CTA cluster (button visuals for .btn/.btn-outline live in components/_buttons.scss) */
+  .intro-ctas{
+    display:flex; gap:.75rem; flex-wrap:wrap; justify-content:center; margin-top:.5rem;
+  
+    .btn{ border-radius:999px; font-weight:700; padding:.55rem 1.1rem; }
+    .btn-outline{ background:#fff; border:1px solid #013f87; color:#013f87; }
+    .btn-outline:hover{ background:#013f87; color:#fff; }
+  }
+  
+  /* Space the CTA under the cards section when used */
+  .conf-cards-cta{ margin-top: 1rem; }
+  
+  // --------------------------------------------------
+  // Home: Cards grid container tweaks (cards themselves are in components/_cards.scss)
+  // --------------------------------------------------
+  .conf-cards { padding: 2.25rem 0 3rem; } // same as original
+  
+  /* Make ONLY the home-intro container wider on large screens */
+  @media (min-width: 1200px){
+    .home-intro .container{ max-width: 1320px; }
+  }
+  
+  /* Wide intro variant (keeps card shadows unclipped and grid wider) */
+  .intro-panel--wide{
+    max-width: 100%;
+    overflow: visible;
+  
+    /* Don’t let the inner .container shrink the cards */
+    .conf-cards .container{
+      max-width: none;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  
+    /* Grid: 4 → 2 → 1, with consistent gaps */
+    @media (min-width: 1200px){
+      .conf-cards-grid{
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 18px;
+      }
+    }
+    @media (max-width: 1199.98px){
+      .conf-cards-grid{
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+    }
+    @media (max-width: 600px){
+      .conf-cards-grid{
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+    }
+  
+    /* Ensure grid children don’t force track width */
+    .conf-cards-grid > *{ min-width: 0; }
+  
+    /* Optional: little inner breathing room */
+    padding-inline: clamp(16px, 2vw, 28px);
+  }
+  
+  // --------------------------------------------------
+  // Sponsor strip (used on home)
+  // --------------------------------------------------
+  // Sponsor strip (used on home)
+.sponsor-image {
+    padding-bottom: 3rem;
+  
+    img {
+      width: 650px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-inline: auto; // centers the image
+    }
+  }
+  
+  

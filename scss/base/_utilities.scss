@@ -1,0 +1,70 @@
+// ============================================================================
+// UTILITIES — tiny single-purpose classes (prefixed `u-` to avoid BS clashes)
+// Depends on: settings/{breakpoints,mixins,tokens}
+// ============================================================================
+
+@use "../settings/breakpoints" as bp;
+@use "../settings/mixins" as m;
+
+/* Visibility & accessibility */
+.u-visually-hidden { @include m.visually-hidden; }
+.no-scroll, .u-no-scroll { overflow: hidden !important; } /* for body when menus open */
+
+/* Text helpers */
+.u-balance { @include m.balanced; }         /* nicer multi-line headings */
+.u-truncate { @include m.truncate(1); }
+.u-truncate-2 { @include m.truncate(2); }
+.u-truncate-3 { @include m.truncate(3); }
+
+/* Alignment */
+.u-text-center { text-align: center !important; }
+.u-text-right  { text-align: right  !important; }
+.u-text-left   { text-align: left   !important; }
+
+/* Display (responsive show/hide) */
+.u-hide-mobile { @include bp.down(md){ display: none !important; } }
+.u-hide-desktop{ @include bp.up(lg){  display: none !important; } }
+
+/* Spacing shorthands (light set; lean on Bootstrap where possible) */
+.u-mx-auto { margin-inline: auto !important; }
+.u-center   { display: grid !important; place-items: center !important; }
+
+/* Radii & shadows bound to tokens */
+.u-rounded-sm { border-radius: var(--radius-sm) !important; }
+.u-rounded-md { border-radius: var(--radius-md) !important; }
+.u-rounded-lg { border-radius: var(--radius-lg) !important; }
+.u-rounded-xl { border-radius: var(--radius-xl) !important; }
+.u-rounded-pill { border-radius: var(--radius-pill) !important; }
+
+.u-shadow-sm { box-shadow: var(--shadow-sm) !important; }
+.u-shadow-md { box-shadow: var(--shadow-md) !important; }
+.u-shadow-lg { box-shadow: var(--shadow-lg) !important; }
+
+/* Surfaces */
+.u-bg-surface { background: var(--surface) !important; }
+.u-bg-page    { background: var(--page-bg) !important; }
+
+/* Focus ring (consistent, high-contrast) */
+.u-focus-ring { @include m.focus-ring(#003a49, 3px, 2px); }
+
+/* Generic “glass” wrapper (matches your hero glass look) */
+.u-glass {
+  @include m.glass(var(--hero-glass-bg), var(--hero-glass-blur), var(--hero-glass-sat), var(--hero-glass-radius));
+  padding: var(--hero-glass-pad);
+}
+.u-glass--light { background: rgba(255,255,255,.24) !important; color:#0d1b2a; }
+.u-glass--dark  { background: rgba(0,0,0,.35) !important; color:#fff; }
+/* Brand-tinted glass (picks up nearest --brand) */
+.u-glass--brand { --hero-glass-bg: color-mix(in oklab, var(--brand, var(--brand-primary)), #000 12%); color:#fff; }
+
+/* Flow utility: add vertical space between children without first/last hacks */
+.u-flow > * + * { margin-top: .6rem; }
+
+/* Aspect helper (class version of the mixin) */
+.u-aspect-16x9 { aspect-ratio: 16 / 9; }
+.u-aspect-4x3  { aspect-ratio: 4 / 3; }
+.u-aspect-1x1  { aspect-ratio: 1 / 1; }
+
+/* Quick containers (namespaced to avoid Bootstrap .container) */
+.u-container      { max-width: 1200px; margin-inline: auto; padding-inline: 16px; }
+.u-container-wide { max-width: 1320px; margin-inline: auto; padding-inline: 16px; }

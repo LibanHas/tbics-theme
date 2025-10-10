@@ -1,0 +1,182 @@
+// ============================================================================
+// GALLERY — Discover Kumamoto grid + universal caption-pill overrides
+// Matches original selectors/values (no behavior change).
+// ============================================================================
+
+/* ===== Discover Kumamoto section ===== */
+.discover-kumamoto {
+  /* Title row: mascot + red rules + heading */
+  .paws-title{
+    display:flex; align-items:center; justify-content:center; gap:12px;
+
+    .rule{ flex:1 1 120px; max-width:220px; height:2px; background:#c94b4b; }
+    .rule--short{ flex:0 0 48px; } /* tiny spacer rule between mascot & text */
+
+    .kumamon{
+      width:96px; height:auto; display:block;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,.12));
+    }
+
+    h2{ font-weight:800; margin:0; }
+  }
+
+  @media (max-width:576px){
+    .paws-title .kumamon{ width:64px; }
+    .paws-title .rule{ max-width:140px; }
+  }
+
+  .intro{ max-width:860px; }
+  .more-link{ font-weight:600; text-decoration: underline; }
+
+  /* desired tile size (CSS custom props) */
+  --tile-w: 364px;      /* ~364 wide */
+  --tile-ar: 364 / 317; /* aspect ≈ 1.148 (364×317) */
+
+  /* Both Discover galleries */
+  .dk-gallery{
+    display:grid !important;
+    grid-template-columns:repeat(3, var(--tile-w));
+    gap:48px !important;
+    justify-content:center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+    overflow:visible !important;       /* let pills hang out */
+    &.is-cropped{ overflow:visible !important; }
+
+    /* each tile */
+    .wp-block-image,
+    .blocks-gallery-item,
+    .blocks-gallery-item figure{
+      width:100% !important;
+      max-width:none !important;
+      flex:initial !important;
+      position:relative;
+      margin:0 !important;
+      overflow:visible !important;
+      isolation:isolate;               /* cleaner shadow */
+      border-radius:14px;
+      background:#fff;
+      box-shadow:0 6px 16px rgba(0,0,0,.08);
+      aspect-ratio:var(--tile-ar);
+    }
+
+    /* whole tile clickable */
+    figure.wp-block-image > a{
+      position:absolute; inset:0; z-index:1; display:block; border-radius:inherit;
+    }
+
+    /* image fill */
+    .wp-block-image > img,
+    .blocks-gallery-item > figure > img,
+    .wp-block-image > a,
+    .blocks-gallery-item > figure > a{
+      position:absolute; inset:0;
+      display:block;
+      width:100% !important; height:100% !important; max-width:none !important;
+      object-fit:cover; object-position:center; border-radius:inherit;
+    }
+
+    /* caption pill — hard override Gutenberg */
+    figure.wp-block-image figcaption{
+      /* use inset to beat any earlier 'inset: 0' */
+      inset:auto auto -12px -12px !important; /* bottom:-12, left:-12 */
+      left:auto !important; right:auto !important; top:auto !important; bottom:auto !important;
+
+      display:inline-block !important;
+      margin:0 !important; padding:.8rem .8rem !important;
+      width:auto !important; height:auto !important;
+      max-width:calc(100% - 12px) !important;
+      border-radius:999px !important;
+      background:rgba(255,255,255,.98) !important;
+      color:#1f2d3d !important; font-weight:500 !important; line-height:1.1 !important;
+      box-shadow:0 2px 10px rgba(0,0,0,.15) !important;
+      z-index:3 !important; pointer-events:none !important;
+      opacity:1 !important; transform:none !important;
+    }
+    /* kill WP’s gradient overlay on captions */
+    figure.wp-block-image figcaption::before{ content:none !important; }
+
+    /* right-edge tiles (3rd in each row): flip pill outward */
+    figure.wp-block-image:nth-child(3n) > figcaption{
+      inset:auto -12px -12px auto !important; /* bottom:-12, right:-12 */
+    }
+
+    /* subtle hover lift */
+    figure.wp-block-image:hover figcaption,
+    figure.wp-block-image:focus-within figcaption{
+      transform:translateY(-1px) !important;
+      box-shadow:0 4px 16px rgba(0,0,0,.18) !important;
+    }
+  }
+
+  /* responsive */
+  @media (max-width:1200px){ .dk-gallery{ --tile-w:340px; } }
+  @media (max-width:992px){  .dk-gallery{ grid-template-columns:repeat(2, minmax(300px,1fr)); justify-content:center; } }
+  @media (max-width:576px){  .dk-gallery{ grid-template-columns:minmax(280px,1fr); } }
+
+  /* optional: fix tiny rounding seam when needed — add .dk-edgefix on that figure */
+  .dk-gallery .wp-block-image.dk-edgefix > img{
+    position:absolute !important; inset:-1px !important;
+    object-fit:cover; border-radius:inherit;
+  }
+}
+
+/* ===== Global caption pill hard overrides (outside the Discover scope) ===== */
+.dk-gallery figure.wp-block-image{
+  position: relative !important;   /* ensure abs-positioning context */
+}
+
+.dk-gallery figure.wp-block-image > figcaption,
+.dk-gallery figure.wp-block-image > figcaption.wp-element-caption{
+  /* neutralize WP defaults */
+  inset: auto !important;
+  top: auto !important; right: auto !important; bottom: auto !important; left: auto !important;
+  transform: none !important;
+  translate: none !important;
+  margin: 0 !important;
+
+  /* our placement */
+  position: absolute !important;
+  bottom: -12px !important;
+  left: -12px !important;
+
+  display: inline-block !important;
+  width: auto !important; height: auto !important;
+  max-width: calc(100% - 12px) !important;
+
+  padding: .8rem .8rem !important;
+  border-radius: 999px !important;
+  background: rgba(255,255,255,.98) !important;
+  color: #1f2d3d !important; line-height: 1.1 !important; font-weight: 500 !important;
+  box-shadow: 0 2px 10px rgba(0,0,0,.15) !important;
+
+  z-index: 3 !important;           /* above the link layer */
+  pointer-events: none !important; /* keep the whole tile clickable */
+  opacity: 1 !important;
+}
+
+/* kill WP’s gradient overlay that figcaption sometimes gets */
+.dk-gallery figure.wp-block-image > figcaption::before { content: none !important; }
+
+/* subtle hover lift */
+.dk-gallery figure.wp-block-image:hover > figcaption,
+.dk-gallery figure.wp-block-image:focus-within > figcaption{
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 16px rgba(0,0,0,.18) !important;
+}
+
+/* --- Force ALL Discover pills to bottom-left, even 3rd/6th tiles --- */
+.discover-kumamoto
+  .dk-gallery.wp-block-gallery > figure.wp-block-image:nth-child(3n) > figcaption,
+.discover-kumamoto
+  .dk-gallery.wp-block-gallery-2 > figure.wp-block-image:nth-child(3n) > figcaption,
+.discover-kumamoto
+  .dk-gallery.wp-block-gallery-3 > figure.wp-block-image:nth-child(3n) > figcaption,
+.discover-kumamoto
+  .dk-gallery figure.wp-block-image:last-child > figcaption,
+.discover-kumamoto
+  .dk-gallery figure.wp-block-image > figcaption {
+  left: -12px !important;
+  right: auto !important;
+  bottom: -12px !important;
+}

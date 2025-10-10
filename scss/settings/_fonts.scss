@@ -1,0 +1,57 @@
+// ============================================================================
+// FONTS — stacks, weights, and helpers
+// Usage:
+//   @use "settings/fonts" as *;
+//   body { @include use-sans; font-weight: $fw-regular; }
+//   code { @include use-mono; }
+//   .h1  { @include fluid-type(1.5rem, 2.75rem); font-weight: $fw-bold; }
+// ============================================================================
+
+// If you can't enqueue Google Fonts in WP, you can keep this import.
+// (Prefer enqueueing via functions.php for performance.)
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+// Stacks
+$font-sans: 'Lato', system-ui, -apple-system, 'Segoe UI', Roboto,
+            'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji',
+            'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+
+$font-mono: ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas,
+            'Liberation Mono', 'Courier New', monospace !default;
+
+// Weights
+$fw-light:   300 !default;
+$fw-regular: 400 !default;
+$fw-bold:    700 !default;
+
+// Rendering helpers
+@mixin antialias {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+// Quick family helpers
+@mixin use-sans { font-family: $font-sans; }
+@mixin use-mono { font-family: $font-mono; }
+
+// Fluid type helper (clamps between min/max across a viewport range)
+/// @param {length} $min     - smallest font-size (e.g., 1rem)
+/// @param {length} $max     - largest font-size  (e.g., 2rem)
+/// @param {length} $min-vw  - viewport start     (default 360px)
+/// @param {length} $max-vw  - viewport end       (default 1440px)
+@mixin fluid-type($min, $max, $min-vw: 360px, $max-vw: 1440px) {
+  font-size: clamp(
+    $min,
+    calc(#{$min} + (#{ $max - $min }) * ((100vw - #{$min-vw}) / (#{ $max-vw - $min-vw }))),
+    $max
+  );
+}
+
+// Utility classes (optional; handy in content areas)
+.font-sans { @include use-sans; }
+.font-mono { @include use-mono; }
+
+.fw-300 { font-weight: $fw-light; }
+.fw-400 { font-weight: $fw-regular; }
+.fw-700 { font-weight: $fw-bold; }

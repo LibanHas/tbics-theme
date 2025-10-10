@@ -1,0 +1,279 @@
+// pages/_submission.scss
+// Submission & Important Dates + CFP (Call for Papers)
+
+// --------------------------------------------------
+// Submission & Important Dates page tweaks
+// --------------------------------------------------
+#submission-dates {
+    .page-hero {
+      background-color: #013f87; // TBICS blue
+    }
+  
+    .page-hero h1,
+    .page-hero .lead {
+      color: #fff;
+    }
+  
+    .btn-primary {
+      background-color: #013f87;
+      border-color: #013f87;
+    }
+  
+    .btn-outline-primary {
+      color: #013f87;
+      border-color: #013f87;
+  
+      &:hover {
+        background-color: #013f87;
+        color: #fff;
+      }
+    }
+  
+    /* simple emphasis on header cells if native table is used */
+    table th { font-weight: 700; }
+  }
+  
+  // --------------------------------------------------
+  // Dates list (used on Submission/Important Dates)
+  // (SVG calendar icon version – final in your source)
+  // --------------------------------------------------
+  .tbics-dates-list {
+    list-style: none;
+    padding: 0;
+  
+    li {
+      position: relative;
+      padding-left: 2rem;
+      margin-bottom: 1rem;
+  
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0.25rem;
+        left: 0;
+        width: 1.25rem;
+        height: 1.25rem;
+        background: url('/TBICS2026/wp-content/themes/tbics-upload/img/calendar-days.svg')
+                    no-repeat center center;
+        background-size: contain;
+      }
+  
+      strong { color: #013f87; }
+    }
+  }
+  
+  // --------------------------------------------------
+  // Sub-conference grid (blocks under Submission page)
+  // --------------------------------------------------
+  .subconf-grid {
+    display: grid;
+    gap: clamp(16px, 2.4vw, 28px);
+    grid-template-columns: repeat(4, minmax(240px, 1fr)); /* one line */
+    align-items: stretch;
+    max-width: 1200px;
+    justify-content: center;
+    margin-inline: auto;
+    margin-top: 5rem;
+  }
+  
+  .subconf-block{
+    display: grid;
+    grid-template-rows: auto 1fr;
+    gap: .65rem;
+    align-content: start;
+    min-width: 0;
+  }
+  
+  @media (max-width: 1180px){
+    .subconf-grid { grid-template-columns: repeat(2, minmax(240px, 1fr)); }
+  }
+  @media (max-width: 640px){
+    .subconf-grid { grid-template-columns: 1fr; }
+  }
+  
+  /* When a ruled H4 precedes the grid, tighten spacing */
+  #subconf-chairs .section-rule { margin-bottom: 1.25rem; }
+  
+  // --------------------------------------------------
+  // CFP page specific
+  // --------------------------------------------------
+  #cfp-page .btn-primary {
+    background-color: #013f87;
+    border-color: #013f87;
+  }
+  
+  // --------------------------------------------------
+  // CFP Topics list (two-column bullets), Themes grid
+  // --------------------------------------------------
+  /* Topics list (inside CFP body copy) */
+  .cfp-body {
+    ul.topics-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+  
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: .5rem 2rem;
+  
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+  
+      li {
+        position: relative;
+        padding-left: 1.25rem;
+        line-height: 1.35;
+  
+        &::before {
+          content: "";
+          position: absolute;
+          left: 0;
+          top: .6em;
+          width: .5rem;
+          height: .5rem;
+          border-radius: 50%;
+          background: #2f67b2;
+          box-shadow: 0 0 0 .18rem rgba(47,103,178,.18);
+        }
+      }
+    }
+  }
+  
+  /* Simple no-bullets helper (as in source) */
+  .no-bullets,
+  .no-bullets ul,
+  .no-bullets ol {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  
+    li {
+      margin: .25rem 0;
+      &::marker { content: ""; }
+    }
+  }
+  
+  /* Themes of Interest */
+  $themes-gap: 24px;
+  $themes-gap-lg: 28px;
+  $themes-break: 900px; // >=900px → two columns
+  
+  .themes-section {
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Grid wrapper */
+  .themes-grid {
+    width: 100% !important;
+    max-width: none !important;
+  
+    display: grid;
+    gap: $themes-gap;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    align-items: start;
+  
+    /* Heading spans all columns */
+    > .themes-section {
+      grid-column: 1 / -1;
+      margin-bottom: 4px;
+    }
+  
+    /* Kill Gutenberg constraints */
+    .is-layout-constrained,
+    .wp-block-group.is-layout-constrained {
+      max-width: none !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+    }
+  
+    /* Cards fill their tracks */
+    > .theme-card { width: 100%; } // ← no !important
+  
+    /* Inner container as grid */
+    > .wp-block-group__inner-container {
+      width: 100% !important;
+      max-width: none !important;
+      margin: 0 auto !important;
+  
+      display: grid;
+      gap: $themes-gap-lg;
+      grid-template-columns: 1fr; // mobile
+  
+      > .themes-section { grid-column: 1 / -1; }
+      > .theme-card    { width: 100%; height: 100%; }
+    }
+  
+    /* Desktop: two generous columns */
+    @media (min-width: $themes-break) {
+      grid-template-columns: 1fr 1fr;
+  
+      > .wp-block-group__inner-container {
+        grid-template-columns: repeat(2, minmax(420px, 1fr));
+        column-gap: 32px;
+        row-gap: $themes-gap-lg;
+      }
+  
+      /* If there’s an odd number of cards, center the last one */
+      > .theme-card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        max-width: 560px; /* keeps it tidy */
+        width: 100%;
+      }
+  
+      > .wp-block-group__inner-container > .theme-card:last-child:nth-child(odd) {
+        grid-column: 1 / -1;
+        justify-self: center;
+        max-width: 560px;
+        width: 100%;
+      }
+    }
+  }
+  
+
+  /* Card */
+  .theme-card {
+    padding: 1rem 1.25rem;
+    border-radius: 16px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,.78), rgba(255,255,255,.64)),
+      radial-gradient(120% 120% at 0% 0%, rgba(1,63,135,.08), transparent 60%);
+    border: 1px solid rgba(1,63,135,.18);
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    height: 100%;
+  
+    &::before {
+      content: "";
+      display: block;
+      width: 56px;
+      height: 4px;
+      margin: .25rem auto .75rem;
+      background: #c94b4b;
+      border-radius: 4px;
+      opacity: .9;
+    }
+  
+    h6 { margin: 0 0 .35rem; font-weight: 700; }
+    ul { margin: 0; padding-left: 1.25rem; }
+    li { margin: .45rem 0; }
+  }
+  
+  /* Button used under the themes grid (from source; global) */
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    padding: .6rem 1rem;
+    border-radius: 999px;
+    font-weight: 700;
+    background: #2f67b2;
+    color: #fff;
+    border: 1px solid rgba(0,0,0,.08);
+    box-shadow: 0 4px 12px rgba(47,103,178,.25);
+  
+    &:hover { filter: brightness(1.05); }
+    &:focus-visible { outline: 3px solid #cfe0ff; outline-offset: 2px; }
+  }
+  

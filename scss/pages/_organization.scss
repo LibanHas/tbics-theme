@@ -1,0 +1,314 @@
+// pages/_organization.scss
+// About TBICS page: org key-value table, program-chairs table skin,
+// roles rows/cards, members lists.
+
+// =====================================================
+// Org “Key–Value” Table (centered, accessible)
+// =====================================================
+#about-tbics {
+    .org-kv-wrap {
+      max-width: min(100%, 980px);
+      margin-inline: auto;
+    }
+  
+    .org-kv-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: transparent;
+      font-size: clamp(15px, 1.9vw, 18px);
+  
+      th,
+      td {
+        padding: 10px 16px;
+        vertical-align: top;
+        border-top: 1px solid rgba(1,63,135,.14);
+      }
+  
+      /* remove top border on first row */
+      tbody tr:first-child th,
+      tbody tr:first-child td { border-top: 0; }
+  
+      /* label column */
+      th {
+        width: clamp(180px, 26ch, 340px);
+        text-align: right;
+        font-weight: 800;
+        white-space: nowrap;
+        color: #1c2733;
+        padding-right: clamp(12px, 2vw, 22px);
+      }
+  
+      /* value column */
+      td { color: #22303c; }
+  
+      /* lists inside values — restore bullets */
+      .committee-list {
+        list-style: disc !important;
+        margin: 0;
+        padding-left: 1.25rem;
+  
+        li { margin: .35rem 0; }
+      }
+  
+      /* subtle zebra + hover */
+      tr:nth-child(even) td { background: rgba(0,0,0,.025); }
+      tr:hover td { background: rgba(1,63,135,.04); }
+    }
+  
+    /* ------ Mobile: stack label above value ------ */
+    @media (max-width: 720px){
+      .org-kv-table,
+      .org-kv-table tbody,
+      .org-kv-table tr,
+      .org-kv-table th,
+      .org-kv-table td{
+        display: block;
+        width: 100%;
+      }
+      .org-kv-table th{
+        text-align: left;
+        padding-bottom: .25rem;
+        border-top: 0;
+      }
+      .org-kv-table td{
+        padding-top: 0;
+        border-top: 0;
+      }
+      /* divider between stacked rows */
+      .org-kv-table tr + tr{
+        border-top: 1px solid rgba(1,63,135,.14);
+        margin-top: .35rem;
+        padding-top: .35rem;
+      }
+    }
+  
+    // =====================================================
+    // Program Chairs table — cream fill, tight halo
+    // =====================================================
+    /* Gutenberg table block variant */
+    .wp-block-table.org-table {
+      border: 1px solid rgba(1,63,135,.12);
+      border-radius: 16px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.08);
+      overflow: hidden;
+  
+      > table {
+        background: #FAF5EE !important; /* cream */
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+    }
+  
+    /* If inside a tight “card” wrapper */
+    .org-card--tight {
+      padding: 0;
+  
+      .table-responsive {
+        border: 1px solid rgba(1,63,135,.12);
+        border-radius: 16px;
+        box-shadow: 0 8px 22px rgba(0,0,0,.08);
+        overflow: hidden;
+        margin: 0;
+      }
+  
+      table.org-table {
+        background: #FAF5EE;
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+      }
+    }
+  
+    /* Shared table chrome */
+    .org-table {
+      thead th{
+        background: rgba(255,255,255,.66);
+        color: #3a3a3a;
+        text-transform: uppercase;
+        letter-spacing: .02em;
+        font-weight: 700;
+        padding: 14px 16px 16px;
+        border-bottom: 1px solid rgba(1,63,135,.16);
+      }
+      tbody td{
+        padding: 14px 16px;
+        border-top: 1px solid rgba(1,63,135,.10);
+        overflow-wrap: anywhere;
+        hyphens: auto;
+      }
+      tbody tr:nth-child(even){ background: rgba(0,0,0,.035); }
+      tbody tr:hover{ background: rgba(1,63,135,.06); }
+    }
+  }
+  
+  /* Remove default WP/Bootstrap bottom gap on wrapped tables */
+  .table, .wp-block-table table { margin-bottom: 0; }
+  
+  // =====================================================
+  // Roles rows (cards-in-a-row) + grids
+  // =====================================================
+  .org-roles{
+    --gap: clamp(14px, 2.2vw, 24px);
+    --card-min: 220px;
+    --card-max: 320px;
+  
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: var(--gap);
+    flex-wrap: nowrap;
+  }
+  
+  .org-role-card{ flex: 0 1 auto; width: var(--card-max); }
+  
+  .org-roles--cols-2 .org-role-card{
+    width: clamp(var(--card-min), 42vw, var(--card-max));
+  }
+  .org-roles--cols-3 .org-role-card{
+    width: clamp(var(--card-min), 28vw, var(--card-max));
+  }
+  
+  /* solo chair row */
+  .org-roles--solo{
+    display: flex;
+    justify-content: center;
+    gap: clamp(16px, 2.4vw, 28px);
+    margin-bottom: clamp(12px, 1.6vw, 18px);
+  }
+  
+ /* 3 co-chairs as a grid */
+.org-roles--grid-3{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(260px, 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
+  justify-content: center;
+  align-items: stretch;
+}
+.org-roles--grid-3 > .org-role-card,
+.org-roles--grid-4 > .org-role-card {
+  width: auto !important;   /* override flex child width */
+  min-width: 0;             /* allow tracks to shrink */
+  margin: 0;                /* just in case */
+}
+
+/* 4-up roomy grid */
+.org-roles--grid-4{
+  --roles-max: 1220px;
+  max-width: var(--roles-max);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(260px, 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
+  justify-content: center;
+  align-items: stretch;
+}
+
+  
+  /* fallbacks at breakpoints */
+  @media (max-width:1180px){
+    .org-roles--grid-3{ grid-template-columns: repeat(2, minmax(260px,1fr)); }
+    .org-roles--grid-4{ grid-template-columns: repeat(2, minmax(260px,1fr)); }
+  }
+  @media (max-width:980px){
+    .org-roles{ flex-wrap: wrap; }
+    .org-roles--cols-3 .org-role-card,
+    .org-roles--cols-2 .org-role-card{
+      width: clamp(var(--card-min), 46vw, var(--card-max));
+    }
+  }
+  @media (max-width:640px){
+    .org-roles--grid-3,
+    .org-roles--grid-4{ grid-template-columns: 1fr; }
+  
+    .org-roles--cols-2 .org-role-card,
+    .org-roles--cols-3 .org-role-card{ width: 100%; }
+  }
+  
+  /* the card body */
+  .org-role-card{
+    background: #fff;
+    border: 1px solid rgba(1,63,135,.18);
+    border-radius: 16px;
+    box-shadow: 0 8px 22px rgba(0,0,0,.08);
+    padding: clamp(14px, 2.2vw, 20px) clamp(16px, 2.4vw, 22px);
+    text-align: center;
+  
+    .role-label{
+      margin: 0 0 .35rem;
+      font-weight: 700;
+      color: #263238;
+      opacity: .85;
+    }
+    .role-name{
+      margin: 0 0 .35rem;
+      font-weight: 800;
+      font-size: clamp(18px, 2.2vw, 22px);
+      line-height: 1.25;
+    }
+    .role-affil{
+      margin: 0;
+      color: #2f3d4a;
+      line-height: 1.35;
+    }
+  }
+  
+  /* tighten spacing when a ruled H4 precedes roles */
+  .org-section h4.section-rule + .org-roles{
+    margin-top: clamp(8px, 1.6vw, 14px);
+  }
+  
+  // =====================================================
+  // Members lists
+  // =====================================================
+  .org-subtitle {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 5rem;
+    margin-bottom: 3rem;
+  }
+  
+  .org-members{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  
+    display: grid;
+    gap: clamp(10px, 2vw, 14px) clamp(20px, 3vw, 36px);
+  
+    li{ line-height: 1.35; }
+  
+    .name{
+      display: block;
+      font-weight: 800;
+      margin-bottom: .15rem;
+    }
+    .affil{
+      display: block;
+      color: #2f3d4a;
+    }
+  }
+  
+  /* simple two-column grid */
+  .org-members.two-col{
+    grid-template-columns: repeat(2, minmax(260px, 1fr));
+    margin-bottom: 5rem;
+  }
+  @media (max-width: 767.98px){
+    .org-members.two-col{ grid-template-columns: 1fr; }
+  }
+  
+  /* refined two-column: content-sized tracks, centered block */
+  ul.org-members.two-col{
+    display: grid;
+    grid-template-columns: repeat(2, minmax(260px, max-content));
+    gap: clamp(8px, 1.2vw, 14px) clamp(24px, 4vw, 56px);
+  
+    width: fit-content;
+    margin-inline: auto;
+    justify-content: center;
+    justify-items: start;   /* left-align text in cells */
+    text-align: left;
+  }
+  

@@ -1,0 +1,75 @@
+// ============================================================================
+// BASE — reset-ish defaults, typography, layout primitives
+// Depends on: settings/{tokens,fonts,breakpoints,mixins}
+// ============================================================================
+
+@use "../settings/tokens";
+@use "../settings/fonts" as f;
+@use "../settings/breakpoints" as bp;
+@use "../settings/mixins" as m;
+
+/* 1) Modern, gentle reset */
+*, *::before, *::after { box-sizing: border-box; }
+:where(html) { -webkit-text-size-adjust: 100%; }
+:where(body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd){ margin: 0; }
+:where(ul[role='list'], ol[role='list']){ list-style: none; padding: 0; margin: 0; }
+
+/* 2) Root & body */
+html, body { height: 100%; }
+body {
+  @include f.use-sans;
+  @include f.antialias;
+  min-height: 100%;
+  color: var(--text);
+  background: var(--page-bg);
+  line-height: 1.55;
+  font-weight: f.$fw-regular;
+}
+
+/* 3) App shell (matches your old #page / .wrapper pattern) */
+#page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.wrapper { flex: 1 1 auto; }
+
+/* 4) Type scale (lightweight, safe with Bootstrap) */
+h1, h2, h3, h4, h5, h6 { font-weight: f.$fw-bold; line-height: 1.2; }
+h1 { @include f.fluid-type(1.75rem, 2.75rem); @include m.balanced; }
+h2 { @include f.fluid-type(1.5rem,  2.25rem); @include m.balanced; }
+h3 { @include f.fluid-type(1.25rem, 1.75rem); }
+p  { margin-block: .65rem; }
+
+/* 5) Links */
+a {
+  color: var(--brand-primary);
+  text-decoration: none;
+}
+a:hover { text-decoration: underline; }
+
+/* 6) Media */
+img, svg, video, canvas, audio, iframe, embed, object {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+}
+img { height: auto; }
+
+/* 7) Forms (inherit fonts) */
+input, button, textarea, select { font: inherit; color: inherit; }
+button, [type="button"], [type="submit"] { cursor: pointer; }
+
+/* 8) Tables */
+table { border-collapse: collapse; width: 100%; }
+
+/* 9) Misc */
+:focus-visible { outline-offset: 2px; }
+::selection { background: color-mix(in oklab, var(--brand-primary), #fff 70%); color: #0b1320; }
+
+/* 10) Utility wrapper for flowing content blocks (optional) */
+.prose {
+  /* vertical rhythm for loose content (e.g., WP post body) */
+  > * + * { margin-top: .65em; }
+}
+

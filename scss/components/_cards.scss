@@ -1,0 +1,197 @@
+// ============================================================================
+// CARDS — conference grid, tinted cards, chair-card & contact-card
+// Matches the original selectors/values (no behavioral changes).
+// ============================================================================
+
+@use "../settings/tokens" as *;
+
+// ========== Conference Cards =================================================
+.conf-cards { padding: 2.25rem 0 3rem; }
+
+.conf-cards-grid{
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(4, minmax(240px,1fr));
+  align-items: stretch;        /* equal track height */
+  grid-auto-rows: 1fr;         /* equal row height */
+}
+@media (max-width: 1200px){ .conf-cards-grid{ grid-template-columns: repeat(2, minmax(260px,1fr)); } }
+@media (max-width: 640px){  .conf-cards-grid{ grid-template-columns: 1fr; } }
+
+/* Base card: full tinted background + soft highlight */
+.conf-card{
+  --brand: #013f87;
+  --bg1: rgba(1,63,135,.26);   /* top tint   */
+  --bg2: rgba(1,63,135,.16);   /* bottom tint */
+
+  position: relative;
+  display: flex; flex-direction: column; gap: .6rem;
+  padding: 14px 16px 16px;
+  border-radius: 16px;
+
+  background:
+    radial-gradient(140% 140% at 100% 0%, rgba(255,255,255,.18) 0, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 100%);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 10px 22px rgba(0,0,0,.10), inset 0 1px 0 rgba(255,255,255,.35);
+  backdrop-filter: blur(2px) saturate(120%);
+
+  color:#15273d; text-decoration:none;
+  transition: transform .18s ease, box-shadow .18s ease;
+  height: 100%;                 /* equal-height within grid */
+}
+.conf-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(0,0,0,.16);
+  text-decoration: none;
+}
+
+/* Title pill (small glossy ribbon) */
+.conf-tag{
+  display:inline-flex; align-items:center; gap:.35rem;
+  padding:.5rem .8rem; border-radius:999px; font-weight:800; letter-spacing:.2px;
+  color:#fff;
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--brand), #000 14%) 0%,
+    color-mix(in oklab, var(--brand), #fff 10%) 100%);
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.12), 0 3px 8px rgba(0,0,0,.12);
+  width:auto !important; max-width:none;
+}
+.conf-desc{ margin:.3rem 0 .35rem; line-height:1.35; font-size:.97rem; }
+.conf-cta{ margin-top:auto; font-weight:800; color:var(--brand); }
+
+/* Brand variants (direct usage on the card, if not wrapped by .is-*) */
+.conf-card.is-cte  { --brand:#2f67b2; --bg1: rgba(47,103,178,.30); --bg2: rgba(47,103,178,.18); }
+.conf-card.is-ai3l { --brand:#00647E; --bg1: rgb(0 100 126 / 0.32); --bg2: rgb(0 100 126 / 0.18); }
+.conf-card.is-meta { --brand:#c49a2c; --bg1: rgba(196,154,44,.30); --bg2: rgba(196,154,44,.18); }
+.conf-card.is-iclea{ --brand:#d0666f; --bg1: rgba(208,102,111,.30); --bg2: rgba(208,102,111,.18); }
+
+/* Safety override in case theme rules stretch spans */
+.conf-card .conf-tag,
+.conf-card span.conf-tag{ display:inline-flex !important; }
+
+/* Block-style pill for long text */
+.conf-tag--block{
+  display: inline-block;
+  white-space: normal;
+  line-height: 1.15;
+  padding: .85rem 1.25rem;
+  border-radius: 9999px;
+  margin: 0 auto;
+  max-width: 78ch;
+}
+
+/* Intro panel “wide” variant: let the cards fill full width */
+.intro-panel--wide{ padding-inline: clamp(16px, 2vw, 28px); }
+.intro-panel--wide .conf-cards .container{
+  max-width: none;
+  padding-left: 0; padding-right: 0;
+}
+@media (min-width: 1200px){
+  .intro-panel--wide .conf-cards-grid{
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+@media (max-width: 1199.98px){
+  .intro-panel--wide .conf-cards-grid{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+}
+@media (max-width: 600px){
+  .intro-panel--wide .conf-cards-grid{ grid-template-columns: 1fr; gap: 16px; }
+}
+.intro-panel--wide .conf-cards-grid > *{ min-width: 0; } /* avoid track overflow */
+
+// ========== Contact Card =====================================================
+.contact-card{
+  --ring: rgba(1,63,135,.10);
+
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: clamp(14px, 2vw, 20px);
+  align-items: center;
+
+  padding: clamp(14px, 2.2vw, 22px) clamp(16px, 2.6vw, 28px);
+  margin-inline: auto;
+  margin-top: clamp(6px, 1vw, 12px);
+
+  max-width: min(100%, 840px);
+  border-radius: 16px;
+  border: 1px solid var(--ring);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.72)),
+    radial-gradient(120% 120% at 0% 0%, color-mix(in oklab, var(--brand), #fff 70%) 18%, transparent 60%);
+  box-shadow: 0 8px 22px rgba(0,0,0,.08);
+}
+
+.contact-icon{
+  inline-size: 46px; block-size: 46px;
+  display: grid; place-items: center;
+  border-radius: 999px; color: #fff;
+  background: linear-gradient(180deg,
+    color-mix(in oklab, var(--brand), #000 12%),
+    var(--brand));
+  box-shadow: 0 4px 10px rgba(0,0,0,.12), inset 0 -2px 0 rgba(0,0,0,.12);
+}
+
+.contact-copy{ text-align: left; }
+.contact-copy .eyebrow{
+  margin: 0 0 .15rem;
+  font-size: .86rem;
+  font-weight: 800;
+  letter-spacing: .02em;
+  color: color-mix(in oklab, var(--brand), #000 20%);
+  text-transform: uppercase;
+}
+.contact-copy .contact-head{
+  margin: 0 0 .25rem;
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  font-weight: 800;
+}
+.contact-copy .micro{ margin: 0 0 .6rem; opacity: .9; }
+
+.fineprint{ margin:.4rem 0 0; font-size:.85rem; opacity:.75; }
+
+/* Stack nicely on phones */
+@media (max-width: 560px){
+  .contact-card{ grid-template-columns: 1fr; text-align: center; }
+  .contact-copy{ text-align: inherit; }
+  .contact-icon{ margin-inline: auto; }
+}
+
+// ========== Chair Card =======================================================
+.chair-card{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px 16px;
+  border-radius: 16px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.82), rgba(255,255,255,.72)),
+    linear-gradient(180deg, var(--bg1, rgba(1,63,135,.26)) 0%, var(--bg2, rgba(1,63,135,.16)) 100%);
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 8px 22px rgba(0,0,0,.08), inset 0 1px 0 rgba(255,255,255,.35);
+}
+.chair-card .role-label{
+  margin: 0 0 .35rem;
+  font-weight: 700;
+  color: color-mix(in oklab, var(--brand, #013f87), #000 22%);
+  opacity: .9;
+}
+.chair-card .role-name{
+  margin: 0 0 .35rem;
+  font-weight: 800;
+  font-size: clamp(18px, 2.2vw, 22px);
+  line-height: 1.25;
+  color: #14212b;
+}
+.chair-card .role-affil{
+  margin: 0;
+  color: #2f3d4a;
+  line-height: 1.35;
+}
+
+/* Tighter spacing below the H4 when followed by the grid */
+#subconf-chairs .section-rule{ margin-bottom: 1.25rem; }

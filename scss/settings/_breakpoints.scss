@@ -1,0 +1,80 @@
+// ============================================================================
+// BREAKPOINTS — central scale + helpers
+// Usage:
+//   @use "settings/breakpoints" as bp;
+//   .thing { @include bp.down(nav) { ... } }
+// ============================================================================
+
+@use "./tokens" as *; // pulls $nav-break, $da-tab-break, $themes-break
+
+// Bootstrap-like base scale (keep if you're on BS)
+$breakpoints: (
+  xs:  0,
+  sm:  576px,
+  md:  768px,
+  lg:  992px,
+  xl:  1200px,
+  xxl: 1400px
+) !default;
+
+// Project custom points (from tokens)
+$custom-breakpoints: (
+  nav:    $nav-break,      // 1030px (custom navbar collapse)
+  tabs:   $da-tab-break,   // 992px  (domestic-access tabs)
+  themes: $themes-break    // 900px  (themes grid split)
+) !default;
+
+// Merge so you can reference both the BS names and your customs
+$bp: map-merge($breakpoints, $custom-breakpoints) !default;
+
+// ----- helpers --------------------------------------------------------------
+@function bp($key) {
+  @return map-get($bp, $key);
+}
+
+// ≥ key
+@mixin up($key) {
+  @media (min-width: bp($key)) { @content; }
+}
+
+// ≤ key (non-overlapping with a tiny fraction off the next step)
+@mixin down($key) {
+  $val: bp($key);
+  @if $val == 0 {
+    @content; // xs-down is just “always”
+  } @else {
+    @media (max-width: calc(#{$val} - 0.02px)) { @content; }
+  }
+}
+
+// between: [lower, upper)
+@mixin between($lower, $upper) {
+  $min: bp($lower);
+  $max: bp($upper);
+  @media (min-width: $min) and (max-width: calc(#{$max} - 0.02px)) { @content; }
+}
+
+// only: this step until the next step (or just ≥ if last)
+@mixin only($key) {
+  $keys: map-keys($bp);
+  $idx: index($keys, $key);
+  $min: bp($key);
+
+  @if $idx != null and $idx < length($keys) {
+    $next: nth($keys, $idx + 1);
+    $max: bp($next);
+    @media (min-width: $min) and (max-width: calc(#{$max} - 0.02px)) { @content; }
+  } @else {
+    @media (min-width: $min) { @content; }
+  }
+}
+
+// Quality-of-life aliases
+@mixin mobile       { @include down(md)    { @content; } } // ≤768
+@mixin tablet-up    { @include up(md)      { @content; } } // ≥768
+@mixin desktop      { @include up(lg)      { @content; } } // ≥992
+@mixin desktop-wide { @include up(xl)      { @content; } }
+
+// Feature queries (handy companions)
+@mixin hoverable       { @media (hover: hover) and (pointer: fine) { @content; } }
+@mixin reduced-motion  { @media (prefers-reduced-motion: reduce)   { @content; } }

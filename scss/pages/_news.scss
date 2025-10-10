@@ -1,0 +1,127 @@
+// pages/_news.scss
+// News archive + single post pages
+
+// ===== News Archive Page =====
+#news-archive {
+    font-family: 'Lato', sans-serif;
+  
+    .news-hero {
+      background-color: #013f87; // TBICS primary color
+      color: #fff;
+      padding: 4rem 2rem;
+      text-align: center;
+  
+      .news-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+  
+      .news-subtitle {
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: #ddebf7;
+      }
+    }
+  
+    .list-news {
+      list-style: none;
+      padding: 0;
+      margin: 2rem auto;
+      max-width: 800px;
+  
+      li {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding: 1rem 0;
+  
+        a {
+          text-decoration: none;
+          color: #013f87;
+          display: flex;
+          flex-direction: column;
+  
+          &:hover { color: #457cbf; }
+  
+          .news-date {
+            font-size: 0.9rem;
+            color: #999;
+            margin-bottom: 0.3rem;
+          }
+  
+          .news-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.4;
+          }
+        }
+      }
+    }
+  
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+  
+      .page-numbers {
+        display: inline-block;
+        margin: 0 0.25rem;
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #013f87;
+        color: #013f87;
+        text-decoration: none;
+        border-radius: 4px;
+  
+        &:hover,
+        &.current {
+          background-color: #013f87;
+          color: #fff;
+        }
+      }
+    }
+  }
+  
+  // ===== News Single =====
+  #single-post {
+    .single-hero {
+      background-color: #013f87; // TBICS blue
+      color: #fff;
+      padding: 4rem 0;
+  
+      .post-title { font-size: 2.5rem; font-weight: bold; }
+      .post-meta  { font-size: 1rem; opacity: 0.8; }
+  
+      .btn {
+        background-color: #fff;
+        color: #013f87;
+        font-weight: 500;
+      }
+    }
+  
+    .single-content {
+      max-width: 800px;
+      margin: 0 auto;
+  
+      .post-thumbnail img {
+        border-radius: 8px;
+        width: 100%;
+        height: auto;
+      }
+  
+      .post-body {
+        line-height: 1.7;
+        font-size: 1.1rem;
+        color: #333;
+      }
+    }
+  
+    .post-navigation {
+      a {
+        color: #457CBF;
+        text-decoration: none;
+        font-weight: 600;
+      }
+    }
+  }
+  

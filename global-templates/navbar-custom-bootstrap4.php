@@ -28,11 +28,31 @@ $container = get_theme_mod( 'understrap_container_type' );
         <span class="line2">Festival of Learning 2026</span>
       </div>
 
+      <!-- Mobile-only anniversary pill (gold) -->
+      <div class="nav-anniv is-meta" aria-label="Celebrating 10 Years">
+        <div class="anniv-wrap">
+          <!-- static star sprites -->
+          <span class="sparkle s1" aria-hidden="true">★</span>
+          <span class="sparkle s2" aria-hidden="true">★</span>
+          <span class="sparkle s3" aria-hidden="true">★</span>
+          <span class="sparkle s4" aria-hidden="true">★</span>
+          <span class="sparkle s5" aria-hidden="true">★</span>
+
+          <!-- the gold pill -->
+          <span class="anniv-pill">
+            <span class="anniv-star" aria-hidden="true">★</span>
+            Celebrating 10 Years
+            <span class="anniv-star" aria-hidden="true">★</span>
+          </span>
+        </div>
+      </div>
+
       <!-- Hamburger Icon -->
       <button class="navbar-toggler side-menu-toggle" type="button" aria-label="Toggle side menu">
         <span class="navbar-toggler-icon"></span>
       </button>
 
+      
       <!-- Bootstrap Menu (desktop) -->
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <?php
@@ -49,6 +69,9 @@ $container = get_theme_mod( 'understrap_container_type' );
         );
         ?>
       </div><!-- .collapse -->
+
+       
+
 
   <?php if ( 'container' === $container ) : ?>
     </div><!-- .container -->

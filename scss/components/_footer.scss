@@ -1,0 +1,70 @@
+// ============================================================================
+// _footer.scss — site footer (matches original .custom-footer block)
+// ============================================================================
+@use "../settings/tokens" as *; // for color tokens/vars if you’ve set them
+
+.custom-footer {
+  position: relative;
+  background: linear-gradient(to bottom, #d3e5f2 0%, var(--tbics-solid, #013f87) 5%);
+  color: #fff;
+  padding: 4rem 2rem;
+  font-family: 'Lato', sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 350px;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -180px;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    background: linear-gradient(to bottom, transparent, #d3e5f2);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('./img/kumamoto_footer_image.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.7;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .footer-text {
+    position: relative;
+    z-index: 2; /* above overlays */
+    max-width: 600px;
+    margin-left: 2rem;
+
+    @media (max-width: 480px) {
+      margin-left: 0;
+    }
+
+    .footer-title {
+      font-weight: 700;
+      font-size: 1.5rem;
+      line-height: 1.4;
+      margin-bottom: 1rem;
+    }
+
+    .footer-location,
+    .footer-dates,
+    .footer-copy {
+      font-size: 1rem;
+      margin: 0.3rem 0;
+    }
+  }
+}

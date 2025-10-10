@@ -1,0 +1,58 @@
+// ============================================================================
+// HERO GLASS — wrapper + variants (keeps original class names)
+// Usage:
+//   @use "settings/tokens"; // hero-glass custom properties live there
+//   @use "settings/breakpoints" as bp; // optional if you want mixins
+// ============================================================================
+
+// If you *prefer* these custom properties to live here instead of tokens,
+// move this block out of comments. (We already define them in settings/_tokens.scss)
+/*
+:root{
+  --hero-glass-bg:     rgba(1, 27, 64, .28);
+  --hero-glass-radius: 16px;
+  --hero-glass-pad:    1rem 1.5rem 1.1rem;
+  --hero-glass-blur:   4px;
+  --hero-glass-sat:    130%;
+}
+*/
+
+// Primary utility + alias so existing markup keeps working
+.hero-glass,
+.page-hero .hero-titles {
+  display: block;
+  width: max-content;                   // shrink-wrap to content
+  margin-inline: auto;                  // center without text-align hacks
+  padding: var(--hero-glass-pad);
+  border-radius: var(--hero-glass-radius);
+  background: var(--hero-glass-bg);
+  backdrop-filter: blur(var(--hero-glass-blur)) saturate(var(--hero-glass-sat));
+  -webkit-backdrop-filter: blur(var(--hero-glass-blur)) saturate(var(--hero-glass-sat));
+}
+
+// Tighter spacing for the main heading inside the glass
+.hero-glass h1,
+.page-hero .hero-titles h1 {
+  margin-bottom: .35rem;
+}
+
+// Optional variants (same as original)
+.hero-glass--light { --hero-glass-bg: rgba(255,255,255,.24); color:#0d1b2a; }
+.hero-glass--dark  { --hero-glass-bg: rgba(0,0,0,.35);       color:#fff; }
+
+// Brand-tinted variant lives in settings/_tokens.scss as .hero-glass--brand
+
+// Split-title helper (kept with hero glass since it’s used there in your file)
+.page-hero h1.hero-split { margin: 0; line-height: 1.15; }
+.page-hero h1.hero-split .kicker { display: block; font-weight: 700; }
+.page-hero h1.hero-split .title  { display: block; font-weight: 300; font-size: 36px; margin-top: 1rem; }
+
+// Mobile tweaks (match original breakpoint)
+@media (max-width: 576px) {
+  .hero-glass,
+  .page-hero .hero-titles {
+    --hero-glass-pad: .75rem 1rem .85rem;
+    --hero-glass-radius: 14px;
+    --hero-glass-blur: 3px;
+  }
+}

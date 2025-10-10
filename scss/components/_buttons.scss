@@ -1,0 +1,92 @@
+// ============================================================================
+// BUTTONS — brand CTAs & contextual tweaks
+// Keeps the exact selectors/values from your original stylesheet.
+// ============================================================================
+
+@use "../settings/tokens" as *;
+
+// ----- Global primary button (used under Themes grid) -----------------------
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .6rem 1rem;
+  border-radius: 999px;
+  font-weight: 700;
+  background: #2f67b2; /* brand-cte */
+  color: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  box-shadow: 0 4px 12px rgba(47,103,178,.25);
+
+  &:hover { filter: brightness(1.05); }
+  &:focus-visible { outline: 3px solid #cfe0ff; outline-offset: 2px; }
+}
+
+// Page-specific palette keeps TBICS blue
+#cfp-page .btn-primary {
+  background-color: #013f87;
+  border-color: #013f87;
+}
+
+// ----- Intro panel CTA group -------------------------------------------------
+.intro-ctas{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-top:.5rem;
+}
+.intro-ctas .btn{
+  border-radius:999px;
+  font-weight:700;
+  padding:.55rem 1.1rem;
+}
+.intro-ctas .btn-outline{
+  background:#fff;
+  border:1px solid #013f87;
+  color:#013f87;
+}
+.intro-ctas .btn-outline:hover{
+  background:#013f87;
+  color:#fff;
+}
+.intro-ctas .btn-primary{
+  background-color:#013f87;
+  border-color:#013f87;
+}
+.intro-ctas .btn-primary:hover{ filter:brightness(1.08); }
+
+// Space CTA block under conference cards
+.conf-cards-cta{ margin-top: 1rem; }
+
+// ----- Brand gradient button -------------------------------------------------
+.btn-brand{
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .54rem .9rem;
+  border-radius: 999px;
+  font-weight: 800;
+  color: #fff !important;
+  text-decoration: none;
+  background: linear-gradient(
+               180deg,
+               color-mix(in oklab, var(--brand, #013f87), #000 12%) 0%,
+               color-mix(in oklab, var(--brand, #013f87), #fff 10%) 100%);
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,.12), 0 6px 16px rgba(0,0,0,.12);
+  transition: transform .08s ease, box-shadow .12s ease, filter .12s ease;
+
+  &:hover  { filter: brightness(1.04); transform: translateY(-1px); }
+  &:active { transform: translateY(0); }
+}
+
+// ----- Optional: symposia button (brand-aware fill) -------------------------
+.btn-symposia{
+  display:inline-flex; align-items:center; gap:.5rem;
+  padding:.6rem 1rem; border-radius:999px; font-weight:700;
+  background: var(--brand, #013f87); color:#fff; border:1px solid rgba(0,0,0,.08);
+  box-shadow: 0 4px 12px rgba(0,0,0,.18);
+
+  &:hover { filter: brightness(1.05); }
+  &:focus-visible { outline: 3px solid #cfe0ff; outline-offset: 2px; }
+}

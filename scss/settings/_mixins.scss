@@ -1,0 +1,138 @@
+// ============================================================================
+// MIXINS — media queries, a11y, layout, visuals, motion
+// Usage:
+//   @use "settings/breakpoints" as bp;
+//   @use "settings/tokens" as t;
+//   @use "tools/mixins" as *;
+//
+//   .card {
+//     @include elevation(2);
+//     @include hover-lift;
+//     @include focus-ring;
+//   }
+// ============================================================================
+
+@use "./breakpoints" as bp;
+
+// ========== MEDIA QUERY HELPERS =============================================
+// (Relies on the $breakpoints map + up/down/between mixins you defined in
+//  settings/breakpoints.scss. If you used different names, tweak here.)
+@mixin up($key)      { @include bp.up($key)      { @content; } }
+@mixin down($key)    { @include bp.down($key)    { @content; } }
+@mixin between($a,$b){ @include bp.between($a,$b){ @content; } }
+
+// Feature queries
+@mixin reduce-motion { @media (prefers-reduced-motion: reduce){ @content; } }
+@mixin dark          { @media (prefers-color-scheme: dark){ @content; } }
+@mixin high-dpi      { @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi){ @content; } }
+
+// ========== ACCESSIBILITY / INTERACTION =====================================
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px !important; height: 1px !important;
+  padding: 0 !important; margin: -1px !important;
+  overflow: hidden !important; clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important; border: 0 !important;
+}
+
+@mixin focus-ring($color: #003a49, $width: 3px, $offset: 2px) {
+  &:focus-visible {
+    outline: $width solid $color;
+    outline-offset: $offset;
+  }
+}
+
+// ========== LAYOUT ===========================================================
+@mixin container($max: 1200px, $pad: 16px) {
+  max-width: $max;
+  margin-inline: auto;
+  padding-inline: $pad;
+}
+
+@mixin center-abs {
+  position: absolute; inset: 0;
+  display: grid; place-items: center;
+}
+
+@mixin flex-center($dir: row, $gap: 0) {
+  display: flex; flex-direction: $dir;
+  align-items: center; justify-content: center;
+  gap: $gap;
+}
+
+
+// AFTER ✅
+@function clamp-space($min, $max, $min-vw: 360px, $max-vw: 1440px) {
+    @return clamp(
+      $min,
+      calc(#{$min} + (#{ $max - $min }) * ((100vw - #{$min-vw}) / (#{ $max-vw - $min-vw }))),
+      $max
+    );
+  }
+  
+
+@mixin aspect($w, $h) {
+  // Modern browsers: aspect-ratio plus safe fallback
+  aspect-ratio: calc(#{$w} / #{$h});
+}
+
+// ========== TEXT / TRUNCATION ===============================================
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+@mixin balanced {
+  // Use where supported to balance headings
+  text-wrap: balance;
+}
+
+// ========== VISUALS ==========================================================
+@mixin elevation($level: 1) {
+  @if $level == 0 { box-shadow: none; }
+  @else if $level == 1 { box-shadow: 0 2px 8px rgba(0,0,0,.06); }
+  @else if $level == 2 { box-shadow: 0 6px 18px rgba(0,0,0,.10); }
+  @else if $level == 3 { box-shadow: 0 10px 24px rgba(0,0,0,.14); }
+  @else { box-shadow: 0 14px 32px rgba(0,0,0,.18); }
+}
+
+@mixin hover-lift($y: -2px) {
+  transition: transform .18s ease, box-shadow .18s ease, filter .12s ease;
+  &:hover { transform: translateY($y); }
+}
+
+@mixin glass(
+  $bg: rgba(1,63,135,.16),
+  $blur: 6px,
+  $saturation: 130%,
+  $radius: 16px
+) {
+  background: $bg;
+  backdrop-filter: blur($blur) saturate($saturation);
+  -webkit-backdrop-filter: blur($blur) saturate($saturation);
+  border-radius: $radius;
+}
+
+@mixin gradient-overlay($from, $to, $dir: to bottom) {
+  position: relative;
+  &::after{
+    content:""; position:absolute; inset:0;
+    background: linear-gradient($dir, $from, $to);
+    pointer-events:none;
+  }
+}
+
+// ========== MOTION ===========================================================
+@mixin transition($props: all, $dur: .26s, $ease: cubic-bezier(.22,1,.36,1)) {
+  transition: $props $dur $ease;
+}
+
+@mixin will-change($props...) {
+  will-change: $props;
+}
