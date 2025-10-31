@@ -70,6 +70,11 @@ $z-modal:    1300 !default;
   --hero-glass-pad:    1rem 1.5rem 1.1rem;
   --hero-glass-blur:   4px;
   --hero-glass-sat:    130%;
+  
+    /* Inline link tokens (body text) */
+    --link-inline:  #0645ad; /* readable “link blue” */
+    --link-hover:   #0b5fff; /* brighter on hover */
+    --link-visited: #5a3696; /* accessible visited */
 }
 
 /* Brand scopes (used by cards, pills, hero-glass--brand) */

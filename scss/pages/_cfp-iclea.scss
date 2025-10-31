@@ -1,0 +1,38 @@
+/* ICLEA 2026 CFP page — make inline links unmistakably clickable */
+#cfp-iclea {
+    /* Paragraph & list links (exclude buttons) */
+    .wp-content :where(p, li) a:not(.btn, .btn-brand) {
+      color: var(--link-inline);
+      text-decoration: underline;
+      text-underline-offset: 0.15em;
+      text-decoration-thickness: 0.12em;
+      font-weight: 600; /* subtle affordance */
+      transition: color .15s ease, text-decoration-thickness .15s ease;
+    }
+  
+    .wp-content :where(p, li) a:not(.btn, .btn-brand):hover,
+    .wp-content :where(p, li) a:not(.btn, .btn-brand):focus {
+      color: var(--link-hover);
+      text-decoration-thickness: 0.18em;
+    }
+  
+    .wp-content :where(p, li) a:not(.btn, .btn-brand):visited {
+      color: var(--link-visited);
+    }
+  
+    /* Keyboard focus: visible and brand-consistent */
+    .wp-content a:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 2px;
+      border-radius: 2px;
+    }
+  
+
+  
+    /* Don’t underline headings that contain links (rare, but safe) */
+    :where(h1, h2, h3, h4, h5, h6) a {
+      text-decoration: none;
+      font-weight: inherit;
+    }
+  }
+  

@@ -277,3 +277,25 @@
     &:focus-visible { outline: 3px solid #cfe0ff; outline-offset: 2px; }
   }
   
+/* Submission page: inline EasyChair URL + CTA */
+.inline-url {
+  word-break: break-all;      /* wrap long URL on small screens */
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.submission-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  @media (max-width: 576px) {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

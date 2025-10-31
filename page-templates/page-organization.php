@@ -135,7 +135,7 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
           <h5 class="org-subtitle">Members</h5>
           <ul class="org-members two-col">
             <li><span class="name">Toshihiro KITA</span><span class="affil">Kumamoto University, Japan</span></li>
-            <li><span class="name">Mashashi TODA</span><span class="affil">Kumamoto University, Japan</span></li>
+            <li><span class="name">Masashi TODA</span><span class="affil">Kumamoto University, Japan</span></li>
             <li><span class="name">Yoshiko GODA</span><span class="affil">Kumamoto University, Japan</span></li>
             <li><span class="name">Hiroshi NAKANO</span><span class="affil">Kumamoto University, Japan</span></li>
             <li><span class="name">Asuka KAWAGOE</span><span class="affil">Kumamoto University, Japan</span></li>
@@ -189,7 +189,28 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
       </div>
     </div>
   </section>
-
+  <!-- Questions / Contacts -->
+<section class="org-section mb-5">
+  <div class="<?php echo esc_attr($container); ?>">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <h4 class="section-rule">Questions / Contacts</h4>
+        <ul class="org-contact list-unstyled mt-3">
+          <li>
+            Questions about submissions should be emailed to the PC Chair of the relevant track.
+          </li>
+          <li class="mt-2">
+            Other questions related to local information should be emailed to
+            <a href="mailto:tbics2026@gmail.com?subject=TBICS%202026%20Local%20Info%20Inquiry"
+              aria-label="Email TBICS 2026 local organization: tbics2026@gmail.com">
+              tbics2026@gmail.com
+            </a>.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 </main>
 
 <?php get_footer(); ?>

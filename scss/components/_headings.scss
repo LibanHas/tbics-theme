@@ -75,32 +75,53 @@
   .section-title::after  { left: 100%;  margin-left: 12px; }
   
   // ========== Global ruled H4 utility =========================================
-  h4.section-rule{
-    --rule-width: 720px;
-    --rule-color: #c94b4b;
-  
-    display: flex; align-items: center; justify-content: center;
-    gap: 12px;
-    width: min(var(--rule-width), 100%);
-    margin: 5rem auto 5rem;
-    line-height: 1.2;
-  
-    &::before,
-    &::after{
-      content: "";
-      flex: 1 1 0;
-      height: 3px;
-      background: var(--rule-color);
-      border-radius: 2px;
-    }
-  
-    @media (max-width: 991.98px){ --rule-width: 600px; }
-    @media (max-width: 576px){    --rule-width: 100%; gap: 10px; }
-  
-    &.rule-wide   { --rule-width: 840px; }
-    &.rule-narrow { --rule-width: 640px; }
-    &.rule-blue   { --rule-color: #013f87; }
+  /* Section titles with rules — responsive sizing */
+h4.section-rule{
+  /* scale sensibly across breakpoints */
+  font-weight: 800;
+  font-size: clamp(18px, 3.8vw, 26px);  /* ~20–22px on phones, 24–26px desktop */
+  text-wrap: balance;                   /* nicer multi-line wrapping */
+  overflow-wrap: anywhere;
+
+  /* existing styles… */
+  --rule-width: 720px;
+  --rule-color: #c94b4b;
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px;
+  width: min(var(--rule-width), 100%);
+  margin: 5rem auto 5rem;
+  line-height: 1.2;
+
+  &::before,
+  &::after{
+    content: "";
+    flex: 1 1 0;
+    height: 3px;
+    background: var(--rule-color);
+    border-radius: 2px;
   }
+
+  @media (max-width: 991.98px){ --rule-width: 600px; }
+  @media (max-width: 576px){
+    --rule-width: 100%;
+    gap: 8px;                /* was 10–12px */
+    line-height: 1.15;
+    margin: 3rem auto 2.25rem;
+    &::before, &::after{ height: 2px; }  /* slimmer rules */
+  }
+
+  /* ultra-small phones */
+  @media (max-width: 380px){
+    font-size: clamp(17px, 4.4vw, 22px);
+    /* if a title wraps awkwardly, you can hide the rules: */
+    /* &::before, &::after{ display:none; } */
+  }
+
+  &.rule-wide   { --rule-width: 840px; }
+  &.rule-narrow { --rule-width: 640px; }
+  &.rule-blue   { --rule-color: #013f87; }
+}
+
   
   // ========== Kicker / title inline helpers (CFP intro row) ===================
   .cfp-intro-title{

@@ -146,11 +146,29 @@ $hero_lead = get_field('hero_lead') ?: 'Cultivating Symbiotic Ecosystems: Agency
               </article>
             </div>
 
-            <div class="org-roles org-roles--center org-roles--cols-2">
+            <div class="org-roles org-roles--grid-4">
               <article class="org-role-card">
-                <p class="role-label">Program Co-Chairs</p>
-                <h5 class="role-name">To be announced</h5>
-                <p class="role-affil">&nbsp;</p>
+                <p class="role-label">Program Co-Chair</p>
+                <h5 class="role-name">Jon Chao Hong</h5>
+                <p class="role-affil">National Taiwan Normal University, Taiwan</p>
+              </article>
+
+              <article class="org-role-card">
+                <p class="role-label">Program Co-Chair</p>
+                <h5 class="role-name">Longwei Zheng</h5>
+                <p class="role-affil">City University of Macau, Macau</p>
+              </article>
+
+              <article class="org-role-card">
+                <p class="role-label">Program Co-Chair</p>
+                <h5 class="role-name">Fuzheng ZHAO</h5>
+                <p class="role-affil">Jilin University, China</p>
+              </article>
+
+              <article class="org-role-card">
+                <p class="role-label">Program Co-Chair</p>
+                <h5 class="role-name">Longkai Wu</h5>
+                <p class="role-affil">Central Chinese Normal University, China</p>
               </article>
             </div>
           </section>

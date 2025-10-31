@@ -124,7 +124,7 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
           <section class="cfp-section">
             <h4 class="section-title">Proceedings &amp; Journals</h4>
             <p>Accepted papers in the main conference will be published in the proceedings of the APSCE Library (<a href="https://library.apsce.net" target="_blank" rel="noopener">https://library.apsce.net</a>).</p>
-            <p>Authors of accepted distinguished full papers will be invited to submit extended versions of the papers for consideration of publication in top tier journals. More details will be out later.</p>
+            <p>Authors of selected accepted papers will be invited to submit extended versions for possible inclusion in a special section of the <a href="https://learning-analytics.info/index.php/JLA/index" target="_blank" rel="noopener">Journal of Learning Analytics</a>. Details regarding the submission process will be shared at a later date.</p>
           </section>
 
       
@@ -182,7 +182,7 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
     <article class="org-role-card">
       <p class="role-label">Co-Chair</p>
       <h5 class="role-name">Ting-Chia Hsu</h5>
-      <p class="role-affil">Taiwan Normal University</p>
+      <p class="role-affil">Taiwan Normal University, Taiwan</p>
     </article>
 
     <article class="org-role-card">
@@ -195,13 +195,13 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
   <!-- Members -->
   <h5 class="org-subtitle">Members</h5>
   <ul class="org-members two-col">
-    <li><span class="name">Tak-Wai Chan</span><span class="affil">National Taiwan Central University</span></li>
-    <li><span class="name">Maiga Chang</span><span class="affil">Athabasca University</span></li>
-    <li><span class="name">Gautam Biswas</span><span class="affil">Vanderbilt University</span></li>
-    <li><span class="name">Siu-Cheung Kong</span><span class="affil">The Education University of Hong Kong</span></li>
-    <li><span class="name">Chee Kit Looi</span><span class="affil">The Education University of Hong Kong</span></li>
-    <li><span class="name">Ma. Mercedes T. Rodrigo</span><span class="affil">Ateneo de Manila University</span></li>
-    <li><span class="name">Yanjie Song</span><span class="affil">The Education University of Hong Kong</span></li>
+    <li><span class="name">Tak-Wai Chan</span><span class="affil">National Central University, Taiwan</span></li>
+    <li><span class="name">Maiga Chang</span><span class="affil">Athabasca University, Canada</span></li>
+    <li><span class="name">Gautam Biswas</span><span class="affil">Vanderbilt University, United States</span></li>
+    <li><span class="name">Siu-Cheung Kong</span><span class="affil">The Education University of Hong Kong, Hong Kong</span></li>
+    <li><span class="name">Chee Kit Looi</span><span class="affil">The Education University of Hong Kong, Hong Kong</span></li>
+    <li><span class="name">Ma. Mercedes T. Rodrigo</span><span class="affil">Ateneo de Manila University, Philippines</span></li>
+    <li><span class="name">Yanjie Song</span><span class="affil">The Education University of Hong Kong, Hong Kong</span></li>
   </ul>
 </section>
 

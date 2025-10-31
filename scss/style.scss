@@ -29,6 +29,7 @@
 @use './pages/submission';
 @use './pages/organization';
 @use './pages/venue';
+@use "pages/cfp-iclea";
 
 /* (Any ad-hoc CSS like html/body resets should live in base/_base.scss)
    If you must keep them here, put them AFTER all @use rules. */

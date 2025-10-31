@@ -159,22 +159,51 @@
     -webkit-backdrop-filter: blur(4px) saturate(130%);
   }
   
-  .intro-heading.ruled{
-    display:flex; align-items:center; justify-content:center; gap:12px;
-    font-weight:800; margin:0 0 1rem; line-height:1.2;
-  
-    &::before,
-    &::after{
-      content:""; flex:1 1 0; height:3px; background:#c94b4b; border-radius:2px;
-      max-width:220px;
-    }
+  /* Intro heading — responsive sizing + friendlier rules on mobile */
+.intro-heading.ruled{
+  /* scales down on phones, caps at desktop size */
+  font-size: clamp(18px, 4.8vw, 32px);
+  text-wrap: balance;         /* nicer multi-line wrapping */
+  overflow-wrap: anywhere;    /* prevent overflow on very long words */
+}
+
+@media (max-width: 600px){
+  .intro-heading.ruled{ gap: 8px; line-height: 1.15; }
+  .intro-heading.ruled::before,
+  .intro-heading.ruled::after{
+    height: 2px;
+    max-width: 96px;          /* shorter rules so the text has room */
+    flex: 1 1 24px;
+    opacity: .9;
   }
+}
+
+@media (max-width: 380px){
+  .intro-heading.ruled{ font-size: clamp(17px, 5.2vw, 21px); }
+  /* If it still feels cramped, you can hide the rules on ultra-narrow screens: */
+  /* .intro-heading.ruled::before,
+     .intro-heading.ruled::after{ display:none; } */
+}
+
   
+  /* Intro badge — scale down on phones */
+.intro-badge{
+  inline-size: clamp(150px, 48vw, 220px); /* width */
+  block-size: auto;
+  padding-block: clamp(.5rem, 3vw, 2rem); /* was 3rem top/btm */
+  display:block;
+  margin: .5rem auto 1rem;                /* a touch tighter */
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,.10));
+}
+
+/* Extra small phones */
+@media (max-width: 380px){
   .intro-badge{
-    width: 220px; max-width: 60vw; height:auto; padding-top: 3rem; padding-bottom: 3rem;
-    display:block; margin: .75rem auto 1.25rem;
-    filter: drop-shadow(0 6px 16px rgba(0,0,0,.08));
+    inline-size: clamp(130px, 60vw, 190px);
+    padding-block: clamp(.4rem, 2.5vw, .8rem);
   }
+}
+
   
   .intro-body{ text-align: left; max-width: 960px; margin: 0 auto; }
   

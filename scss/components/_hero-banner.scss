@@ -16,27 +16,36 @@
   --min-h:       clamp(260px, 55svh, 520px);
 
   position: relative;
-  color: inherit; // don't force white on the whole section
-  overflow: hidden;
+  color: inherit;
+  overflow: hidden; /* fallback */
   isolation: isolate;
-
   background: center / cover no-repeat;
   min-height: var(--min-h);
-  padding: var(--pad-top) 0 var(--pad-btm);
+  padding: var(--pad-top) 0 calc(var(--pad-btm) + 1px);
+
+  /* anti-hairline */
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  background-clip: padding-box;
+  @supports (overflow: clip){ overflow: clip; }
 
   &::before{
     content:"";
-    position:absolute; inset:0;
+    position:absolute;
+    inset: 1px; 
     background: rgba(1, 63, 135, 0.18);
     backdrop-filter: blur(3px) saturate(100%);
     -webkit-backdrop-filter: blur(6px) saturate(120%);
     z-index:1;
   }
+
   &::after{
     content:"";
-    position:absolute; left:0; right:0; bottom:0;
+    position:absolute;
+    left:-1px; right:-1px; bottom:-1px;
     height:clamp(64px, 16svh, 160px);
-    background:linear-gradient(to bottom, rgba(221, 235, 247, 0) 0%, #ddebf7 100%);
+    background:linear-gradient(to bottom, rgba(221,235,247,0) 0%, #ddebf7 100%);
     z-index:1;
   }
 
@@ -46,21 +55,7 @@
     padding-inline: var(--pad-x);
   }
 
-  /* Keep only intended hero bits white */
-  .hero-glass,
-  h1,
-  .lead,
-  .anniv-pill { color:#fff; }
-  .hero-glass a { color:#fff; }
-
-  /* Light panels/cards inside hero stay readable */
-  .u-bg-surface,
-  .card,
-  .theme-card,
-  .org-role-card,
-  .tbics-table,
-  .contact-card { color: var(--text); }
-
+  /* base (desktop) */
   .hero-glass{
     display: inline-block;
     max-width: min(48rem, 100%);
@@ -80,12 +75,59 @@
     overflow-wrap: anywhere;
     hyphens: auto;
   }
+
   .lead{
     font-size: clamp(13px, 3.6vw, 18px);
     line-height: 1.35;
     margin: 0;
   }
+
+  /* --- Mobile tweaks (use & to avoid double .page-hero-banner) --- */
+@media (max-width: 600px){
+  /* more breathing room under the navbar */
+  &{
+    --card-radius: 12px;
+    --pad-top: clamp(104px, 22svh, 148px);          /* was clamp(64px, 18svh, 120px) */
+    padding-top: var(--pad-top);                   /* already used via shorthand above */
+    /* optionally include notch safe area: */
+    padding-top: calc(var(--pad-top) + env(safe-area-inset-top, 0px));
+  }
+
+  & .hero-glass{
+    max-width: clamp(18rem, 86vw, 24rem);
+    margin-inline: auto;
+    padding: clamp(10px, 3.2vw, 14px) clamp(12px, 4vw, 16px);
+    /* if you prefer nudging only the glass instead of global pad: */
+    /* margin-top: clamp(8px, 2.4vw, 16px); */
+  }
+
+  & h1{  font-size: clamp(22px, 6vw, 30px); }
+  & .lead{ font-size: clamp(12px, 3.2vw, 16px); }
 }
+
+@media (max-width: 380px){
+  & .hero-glass{ max-width: clamp(16rem, 92vw, 22rem); }
+}
+
+}
+
+/* Phones: center text + tweak filters & bg position */
+/* Keep this, but don't override hero-glass max-width again */
+@media (max-width: 600px){
+  .page-hero-banner{
+    text-align:center; align-items:flex-end; background-position: 50% 35%;
+    &::before{
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(2px);
+      background-color: rgba(1,63,135,.35);
+    }
+  }
+  .page-hero-banner .hero-glass{
+    margin-inline:auto; /* removed the old max-width override */
+  }
+}
+
+
 
 /* ===== Shared anniversary pill styles (hero & navbar) ====================== */
 .anniv-wrap{
@@ -197,7 +239,7 @@
   }
   body.home .hero-section .hero-title{ order: 1; }
   body.home .hero-section .anniv-wrap{
-    display: inline-flex !important; order: 2; margin: .25rem 0 0;
+    display: inline-flex !important; order: 2; margin: 2rem 0 0;
   }
   body.home .hero-section .anniv-pill{
     font-size: clamp(12px, 3.4vw, 14px);

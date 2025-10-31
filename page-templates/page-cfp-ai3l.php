@@ -193,11 +193,11 @@ $hero_lead = get_field('hero_lead') ?: 'Formerly ICFULL';
 
             <h5 class="org-subtitle">Members</h5>
             <ul class="org-members two-col">
-              <li><span class="name">Yu-Ju Lan</span><span class="affil">National Taiwan Normal University (NTNU)</span></li>
-              <li><span class="name">Yun Wen</span><span class="affil">National University of Singapore (NUS)</span></li>
-              <li><span class="name">Wen-Chi Vivian Wu</span><span class="affil">National Chung Hsing University (NCHU)</span></li>
-              <li><span class="name">Jie-Chi Yang</span><span class="affil">National Central University (NCU)</span></li>
-              <li><span class="name">Chunping Zheng</span><span class="affil">Beijing Univ. of Posts &amp; Telecommunications (BUPT)</span></li>
+              <li><span class="name">Yu-Ju Lan</span><span class="affil">National Taiwan Normal University (NTNU), Taiwan</span></li>
+              <li><span class="name">Yun Wen</span><span class="affil">National Institute of Education, <br>Nanyang Technological University, Singapore</span></li>
+              <li><span class="name">Wen-Chi Vivian Wu</span><span class="affil">National Chung Hsing University (NCHU), Taiwan</span></li>
+              <li><span class="name">Jie-Chi Yang</span><span class="affil">National Central University (NCU), Taiwan</span></li>
+              <li><span class="name">Chunping Zheng</span><span class="affil">Beijing University of Posts &amp; Telecommunications (BUPT), China</span></li>
             </ul>
           </section>
 

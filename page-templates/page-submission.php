@@ -100,7 +100,7 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
             <h2 id="sec-formatting" class="section-title">Formatting &amp; Template</h2>
             <p>Please format your submission using the official paper template.</p>
             <a class="btn btn-outline-primary me-2 mb-2"
-               href="https://eds.let.media.kyoto-u.ac.jp/TBICS2026/wp-content/uploads/2025/08/TBICS2026-PaperTemplate.docx"
+               href="https://eds.let.media.kyoto-u.ac.jp/TBICS2026/wp-content/uploads/2025/10/TBICS2026-PaperTemplate_.docx"
                target="_blank"
                rel="noopener">
               Download Paper Template (Word)
@@ -109,12 +109,31 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
 
           <!-- 4) Submission System -->
           <section aria-labelledby="sec-submission" class="mb-5">
-            <h2 id="sec-submission" class="section-title">Submission System</h2>
-            <p>Submit your paper via the online system:</p>
-            <a class="btn btn-primary mb-2 disabled" href="#" tabindex="-1" aria-disabled="true">
-              Open Submission System
-            </a>
-            <p class="text-muted"><em>The link to the submission system will be available soon.</em></p>
+              <p class="mb-2">
+              Submit your paper via the online system:
+              <a class="inline-url"
+                href="https://easychair.org/conferences/?conf=tbics2026"
+                target="_blank" rel="noopener">
+                https://easychair.org/conferences/?conf=tbics2026
+              </a>.
+            </p>
+
+            <div class="submission-cta mt-2">
+              <a class="btn btn-primary"
+                href="https://easychair.org/conferences/?conf=tbics2026"
+                target="_blank" rel="noopener"
+                aria-label="Open the TBICS 2026 EasyChair submission system (opens in a new tab)">
+                Open Submission System
+              </a>
+            </div>
+              <ul class="mt-4">
+              <li>
+                Questions about submissions should be emailed to the PC Chair of the relevant track.
+              </li>
+              <li>
+              Other questions related to local information should be emailed to <a href="mailto:tbics2026@gmail.com?subject=TBICS%202026%20Local%20Info%20Inquiry">tbics2026@gmail.com</a>
+              </li>
+              </ul>
           </section>
 
           <!-- 5) Publication -->
