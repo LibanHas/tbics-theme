@@ -135,43 +135,53 @@ $hero_lead = get_field('hero_lead') ?: 'Cultivating Symbiotic Ecosystems: Agency
           </section>
 
           <!-- Conference Chairs -->
-          <section class="cfp-section">
-            <h4 class="section-title">Conference Chairs</h4>
+          
+<section class="cfp-section">
+  <h4 class="section-title">Conference Chairs</h4>
 
-            <div class="org-roles org-roles--center" style="margin-bottom:1.25rem;">
-              <article class="org-role-card">
-                <p class="role-label">Program Chair</p>
-                <h5 class="role-name">Xuesong Michael Zhai</h5>
-                <p class="role-affil">Zhejiang University, China</p>
-              </article>
-            </div>
+  <!-- Solo chair row -->
+  <div class="org-roles org-roles--center" style="margin-bottom:1.25rem;">
+    <article class="org-role-card org-role-card--pc">
+      <p class="role-label">Program Chair</p>
+      <h5 class="role-name">Xuesong Michael Zhai</h5>
+      <p class="role-affil">Zhejiang University, China</p>
+    </article>
+  </div>
 
-            <div class="org-roles org-roles--grid-4">
-              <article class="org-role-card">
-                <p class="role-label">Program Co-Chair</p>
-                <h5 class="role-name">Jon Chao Hong</h5>
-                <p class="role-affil">National Taiwan Normal University, Taiwan</p>
-              </article>
+  <!-- 5-up co-chair row -->
+  <div class="org-roles org-roles--grid-5">
+    <article class="org-role-card org-role-card--pc">
+      <p class="role-label">Program Co-Chair</p>
+      <h5 class="role-name">Jon Chao Hong</h5>
+      <p class="role-affil">National Taiwan Normal University, Taiwan</p>
+    </article>
 
-              <article class="org-role-card">
-                <p class="role-label">Program Co-Chair</p>
-                <h5 class="role-name">Longwei Zheng</h5>
-                <p class="role-affil">City University of Macau, Macau</p>
-              </article>
+    <article class="org-role-card org-role-card--pc">
+      <p class="role-label">Program Co-Chair</p>
+      <h5 class="role-name">Longwei Zheng</h5>
+      <p class="role-affil">City University of Macau, Macau</p>
+    </article>
 
-              <article class="org-role-card">
-                <p class="role-label">Program Co-Chair</p>
-                <h5 class="role-name">Fuzheng ZHAO</h5>
-                <p class="role-affil">Jilin University, China</p>
-              </article>
+    <article class="org-role-card org-role-card--pc">
+      <p class="role-label">Program Co-Chair</p>
+      <h5 class="role-name">Fuzheng ZHAO</h5>
+      <p class="role-affil">Jilin University, China</p>
+    </article>
 
-              <article class="org-role-card">
-                <p class="role-label">Program Co-Chair</p>
-                <h5 class="role-name">Longkai Wu</h5>
-                <p class="role-affil">Central Chinese Normal University, China</p>
-              </article>
-            </div>
-          </section>
+    <article class="org-role-card org-role-card--pc">
+      <p class="role-label">Program Co-Chair</p>
+      <h5 class="role-name">Longkai Wu</h5>
+      <p class="role-affil">Central Chinese Normal University, China</p>
+    </article>
+
+    <article class="org-role-card org-role-card--pc">
+      <p class="role-label">Program Co-Chair</p>
+      <h5 class="role-name">Yanjie SONG</h5>
+      <p class="role-affil">The Education University of Hong Kong, Hong Kong</p>
+    </article>
+  </div>
+</section>
+
 
           <!-- Steering Committee -->
           <section class="cfp-section">

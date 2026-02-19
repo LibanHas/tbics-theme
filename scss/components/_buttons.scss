@@ -80,6 +80,29 @@
   &:active { transform: translateY(0); }
 }
 
+// MOBILE: tighten spacing + block any full-width stretching
+@media (max-width: 480px) {
+  a.btn-brand,
+  .btn.btn-brand {               // higher specificity than `.btn`
+    padding-block: .42rem !important;
+    padding-inline: .64rem !important;
+    gap: .25rem;
+    font-size: .95rem;
+
+    /* prevent 100% width from utilities/frameworks */
+    width: 75% !important;
+    max-width: max-content;
+    white-space: normal;
+    display: inline-flex;
+    align-self: flex-start;
+    justify-self: start;
+  }
+
+  /* if Bootstrap/utility sets .w-100 on buttons, neutralize it here */
+  .btn-brand.w-100 { width: auto !important; }
+}
+
+
 // ----- Optional: symposia button (brand-aware fill) -------------------------
 .btn-symposia{
   display:inline-flex; align-items:center; gap:.5rem;

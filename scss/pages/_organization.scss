@@ -205,6 +205,49 @@
   align-items: stretch;
 }
 
+/* 5-up Program Co-Chair row */
+.org-roles--grid-5{
+  --roles-max: 1400px;                        // was 1220px
+  max-width: min(100%, var(--roles-max));
+  margin-inline: auto;
+
+  display: grid;
+  grid-template-columns: repeat(5, minmax(260px, 1fr)); // allow a nicer min width
+  gap: clamp(16px, 2.4vw, 28px);
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+
+/* Only the Program Co-Chair cards ignore the global width */
+.org-roles--grid-5 > .org-role-card--pc{
+  width: 100%;       /* fill the grid track */
+  min-width: 0;
+  margin: 0;
+}
+
+/* Responsive fallbacks (optional / tweak breakpoints) */
+@media (max-width: 1100px){
+  .org-roles--grid-5{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px){
+  .org-roles--grid-5{
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px){
+  .org-roles--grid-5{
+    grid-template-columns: 1fr;
+    --roles-max: 300px;
+  }
+}
+
+
+
+
+
 /* fallbacks at breakpoints */
 @media (max-width:1180px){
   .org-roles--grid-3{ grid-template-columns: repeat(2, minmax(260px,1fr)); }
@@ -245,7 +288,7 @@
   }
   .role-name{
     margin: 0 0 .35rem;
-    font-weight: 800;
+    font-weight: 700;
     font-size: clamp(18px, 2.2vw, 22px);
     line-height: 1.25;
   }
@@ -337,32 +380,66 @@
   }
 }
 
-/* simple two-column grid */
-.org-members.two-col{
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
-  margin-bottom: 5rem;
-}
-@media (max-width: 767.98px){
-  .org-members.two-col{ grid-template-columns: 1fr; }
-}
-
-/* refined two-column: content-sized tracks, centered block */
-/* safe two-column grid without overflow */
-ul.org-members.two-col{
+.org-members.two-col {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* no content-based min */
-  gap: clamp(8px, 1.2vw, 14px) clamp(24px, 4vw, 56px);
-  width: 100%;
-  max-width: 100%;
-  margin-inline: auto;
-  justify-items: start;
+  grid-auto-flow: row;
+  grid-template-columns:
+    fit-content(38ch)
+    fit-content(38ch);   // each col grows to its widest item, capped at 38ch
+  column-gap: clamp(24px, 4vw, 56px);
+  row-gap: clamp(8px, 1.2vw, 14px);
+  justify-content: center;  // center the two columns as a block
+  justify-items: start;     // items align to the left within each column
   text-align: left;
+  margin-bottom: 5rem;
+
+
+@media (max-width: 767.98px){
+  grid-template-columns: 1fr;      // single column
+    justify-content: stretch; 
 }
 
-/* ensure this wins on phones */
-@media (max-width: 767.98px){
-  ul.org-members.two-col{
-    grid-template-columns: 1fr !important;
-    width: 100%;
-  }
 }
+  
+  /* Make sure list items don’t force full width */
+  ul.org-members.two-col li {
+    text-align: left;
+    padding-left: 5rem;   // tweak value as you like
+  }
+  
+  /* If the inner anchor was full-width, neutralize it */
+  ul.org-members.two-col > li > a{
+    display: inline-block;
+    inline-size: auto;
+    text-align: left;
+  }
+  
+  /* Mobile: 1 column, center items + text */
+@media (max-width: 768px){
+  ul.org-members.two-col{
+    grid-template-columns: 1fr;
+    justify-content: stretch;     /* track fills container */
+    justify-items: center;        /* items sit in the center */
+    padding-inline: clamp(12px, 4vw, 20px);
+  }
+
+  ul.org-members.two-col > li{
+    max-inline-size: 36ch;        /* comfy line length */
+    margin-inline: auto;          /* center the box */
+    text-align: center;           /* center text */
+  }
+
+  /* if names/affils are wrapped in a link, keep it centered */
+  ul.org-members.two-col > li > a{
+    display: inline-block;
+    text-align: inherit;
+    inline-size: auto;
+  }
+
+  /* optional polish */
+  ul.org-members.two-col .member-name{ font-weight: 800; display:block; }
+  ul.org-members.two-col .member-affil{ opacity: .9; }
+}
+
+  
+

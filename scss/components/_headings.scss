@@ -31,28 +31,37 @@
   .section-title::after { left: 100%;  margin-left: 12px; }
   
   /* Phones: flex row, lines inside heading width (no overflow) */
-  @media (max-width: 600px){
-    .section-title{
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      inline-size: 100%;
-      padding-inline: 12px;
-      font-size: clamp(1.1rem, 5.2vw, 1.35rem);
-      overflow: clip;
-    }
-    .section-title::before,
-    .section-title::after{
-      position: static;
-      transform: none;
-      margin: 0;
-      inline-size: auto;
-      block-size: 2px;
-      flex: 1 1 64px;
-      display: block;
-    }
+  /* Mobile: show red lines safely (no overflow) */
+/* Mobile: show lines without forcing horizontal scroll */
+@media (max-width: 600px){
+  .section-title{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(8px, 3vw, 12px);
+    inline-size: 100%;
+    box-sizing: border-box;                /* padding counted inside width */
+    padding-inline: clamp(8px, 3.5vw, 12px);
+    overflow: hidden;                      /* last-resort safety */
+    font-size: clamp(1.1rem, 5.2vw, 1.35rem);
   }
+
+  .section-title::before,
+  .section-title::after{
+    position: static;
+    transform: none;
+    margin: 0;
+    display: block;
+    block-size: 2px;
+    /* bars can shrink on tiny widths, grow on larger phones */
+    flex: 1 1 clamp(20px, 12vw, 64px);
+    min-inline-size: 0;                    /* allow shrinking to avoid overflow */
+    background: #c94b4b;
+    border-radius: 2px;
+  }
+}
+
+
   
   /* ===== Venue page variant (as in original: later override) ===== */
   .section-title{
@@ -78,13 +87,13 @@
   /* Section titles with rules — responsive sizing */
 h4.section-rule{
   /* scale sensibly across breakpoints */
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(18px, 3.8vw, 26px);  /* ~20–22px on phones, 24–26px desktop */
   text-wrap: balance;                   /* nicer multi-line wrapping */
   overflow-wrap: anywhere;
 
   /* existing styles… */
-  --rule-width: 720px;
+  --rule-width: 460px;
   --rule-color: #c94b4b;
   display: flex; align-items: center; justify-content: center;
   gap: 12px;
@@ -96,7 +105,7 @@ h4.section-rule{
   &::after{
     content: "";
     flex: 1 1 0;
-    height: 3px;
+    height: 2px;
     background: var(--rule-color);
     border-radius: 2px;
   }

@@ -63,7 +63,7 @@ $hero_lead = get_field('hero_lead') ?: '';
 
           <!-- Overview -->
           <section class="cfp-section">
-            <h4 class="section-title">Overview</h4>
+            <h4 class="section-rule">Overview</h4>
 
             <p>The 10th APSCE International Conference on Artificial Intelligence, Computational Thinking and STEM Education (AI-CTE-STEM 2026) is a highly anticipated event organized by the Asia-Pacific Society for Computers in Education (APSCE) and hosted by Kumamoto University, Japan.</p>
 
@@ -79,7 +79,7 @@ $hero_lead = get_field('hero_lead') ?: '';
 
           <!-- Conference Organizers -->
           <section class="cfp-section">
-            <h4 class="section-title">Conference Organizers</h4>
+            <h4 class="section-rule">Conference Organizers</h4>
 
             <!-- Program Committee -->
             <div class="org-roles org-roles--center" style="margin-bottom:1.25rem;">
@@ -112,11 +112,16 @@ $hero_lead = get_field('hero_lead') ?: '';
                 <p class="role-affil">University of Zagreb, Croatia</p>
               </article>
             </div>
+            <div class="text-center mt-5 mb-4">
+              <a class="btn-brand" href="<?php echo esc_url( home_url( '/ai-cte-stem-2026-program-committee/' ) ); ?>">
+              AI-CTE-STEM 2026 Program Committee Members
+              </a>
+            </div>
           </section>
 
           <!-- Themes of Interest -->
           <section class="cfp-section">
-            <h4 class="section-title">Themes of Interest</h4>
+            <h4 class="section-rule">Themes of Interest</h4>
 
             <div class="themes-grid">
               <article class="theme-card">
@@ -178,7 +183,7 @@ $hero_lead = get_field('hero_lead') ?: '';
 
           <!-- Important Dates -->
           <section class="cfp-section">
-            <h4 class="section-title">Important Dates</h4>
+            <h4 class="section-rule">Important Dates</h4>
             <p class="text-center">
               Please see the
               <a href="https://eds.let.media.kyoto-u.ac.jp/TBICS2026/submission-and-important-dates/" target="_blank" rel="noopener">
@@ -189,7 +194,7 @@ $hero_lead = get_field('hero_lead') ?: '';
           </section>
 <!-- Steering Committee -->
 <section class="cfp-section">
-  <h4 class="section-title">Steering Committee</h4>
+  <h4 class="section-rule">Steering Committee</h4>
 
   <div class="org-roles org-roles--grid-3">
     <article class="org-role-card">
@@ -218,9 +223,11 @@ $hero_lead = get_field('hero_lead') ?: '';
   </ul>
 </section>
 
+
+
           <!-- Contact -->
           <section class="cfp-section is-cte" aria-labelledby="contact-title">
-            <h4 id="contact-title" class="section-title">Contact</h4>
+            <h4 id="contact-title" class="section-rule">Contact</h4>
 
             <div class="contact-card is-cte">
               <div class="contact-icon" aria-hidden="true">

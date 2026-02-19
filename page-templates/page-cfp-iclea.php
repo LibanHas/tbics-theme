@@ -14,6 +14,7 @@ $container = get_theme_mod('understrap_container_type');
 add_filter('pre_get_document_title', function($title){
   return 'ICLEA 2026';
 }, 99);
+$hero_lead = get_field('hero_lead') ?: 'Exploring New Frontiers in Learning Analytics through Artificial Intelligence (AI) Augmentation';
 
 $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/09/kumamoto-jo-sakura.jpg';
 ?>
@@ -27,6 +28,9 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
         <h1 class="hero-split">
           <span class="kicker">Call for Papers</span>
           <span class="title">ICLEA 2026</span>
+          <?php if ($hero_lead): ?>
+          <p class="lead mb-0"><?php echo esc_html($hero_lead); ?></p>
+        <?php endif; ?>
         </h1>
       </div>
     </div>
@@ -163,6 +167,11 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
     <p class="role-affil">Kyoto University, Japan</p>
   </article>
 </div>
+<div class="text-center mt-5 mb-4">
+              <a class="btn-brand" href="<?php echo esc_url( home_url( '/iclea-2026-program-committee/' ) ); ?>">
+              ICLEA 2026 Program Committee Members
+              </a>
+            </div>
 </section>
 
 

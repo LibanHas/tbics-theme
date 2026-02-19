@@ -1,7 +1,7 @@
 @charset "UTF-8";
 /* style.scss — entrypoint */
 /* 1) Settings (must come first) */
-@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap&subset=latin-ext");
 .font-sans {
   font-family: "Lato", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
@@ -553,26 +553,32 @@ table {
 }
 
 /* Phones: flex row, lines inside heading width (no overflow) */
+/* Mobile: show red lines safely (no overflow) */
+/* Mobile: show lines without forcing horizontal scroll */
 @media (max-width: 600px) {
   .section-title {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: clamp(8px, 3vw, 12px);
     inline-size: 100%;
-    padding-inline: 12px;
+    box-sizing: border-box; /* padding counted inside width */
+    padding-inline: clamp(8px, 3.5vw, 12px);
+    overflow: hidden; /* last-resort safety */
     font-size: clamp(1.1rem, 5.2vw, 1.35rem);
-    overflow: clip;
   }
   .section-title::before,
   .section-title::after {
     position: static;
     transform: none;
     margin: 0;
-    inline-size: auto;
-    block-size: 2px;
-    flex: 1 1 64px;
     display: block;
+    block-size: 2px;
+    /* bars can shrink on tiny widths, grow on larger phones */
+    flex: 1 1 clamp(20px, 12vw, 64px);
+    min-inline-size: 0; /* allow shrinking to avoid overflow */
+    background: #c94b4b;
+    border-radius: 2px;
   }
 }
 /* ===== Venue page variant (as in original: later override) ===== */
@@ -607,12 +613,12 @@ table {
 /* Section titles with rules — responsive sizing */
 h4.section-rule {
   /* scale sensibly across breakpoints */
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(18px, 3.8vw, 26px); /* ~20–22px on phones, 24–26px desktop */
   text-wrap: balance; /* nicer multi-line wrapping */
   overflow-wrap: anywhere;
   /* existing styles… */
-  --rule-width: 720px;
+  --rule-width: 460px;
   --rule-color: #c94b4b;
   display: flex;
   align-items: center;
@@ -626,7 +632,7 @@ h4.section-rule {
 h4.section-rule::before, h4.section-rule::after {
   content: "";
   flex: 1 1 0;
-  height: 3px;
+  height: 2px;
   background: var(--rule-color);
   border-radius: 2px;
 }
@@ -1180,6 +1186,26 @@ body:not(.home) .navbar-toggler-icon::after {
   transform: translateY(0);
 }
 
+@media (max-width: 480px) {
+  a.btn-brand,
+  .btn.btn-brand {
+    padding-block: 0.42rem !important;
+    padding-inline: 0.64rem !important;
+    gap: 0.25rem;
+    font-size: 0.95rem;
+    /* prevent 100% width from utilities/frameworks */
+    width: 75% !important;
+    max-width: max-content;
+    white-space: normal;
+    display: inline-flex;
+    align-self: flex-start;
+    justify-self: start;
+  }
+  /* if Bootstrap/utility sets .w-100 on buttons, neutralize it here */
+  .btn-brand.w-100 {
+    width: auto !important;
+  }
+}
 .btn-symposia {
   display: inline-flex;
   align-items: center;
@@ -1202,7 +1228,7 @@ body:not(.home) .navbar-toggler-icon::after {
 
 .page-hero-banner {
   --pad-x: clamp(12px, 4vw, 24px);
-  --pad-top: clamp(64px, 18svh, 120px);
+  --pad-top: clamp(164px, 18svh, 120px);
   --pad-btm: clamp(20px, 8svh, 72px);
   --card-pad: clamp(12px, 3.2vw, 24px);
   --card-radius: 16px;
@@ -1729,7 +1755,7 @@ body:not(.home) .navbar-toggler-icon::after {
 
 .chair-card .role-name {
   margin: 0 0 0.35rem;
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(18px, 2.2vw, 22px);
   line-height: 1.25;
   color: #14212b;
@@ -2422,6 +2448,7 @@ body:not(.home) .navbar-toggler-icon::after {
 }
 .hero-section .hero-title {
   font-weight: 600;
+  margin-top: 1rem;
   font-size: 48px;
 }
 .hero-section .hero-location {
@@ -2838,10 +2865,20 @@ body:not(.home) .navbar-toggler-icon::after {
 #submission-dates .btn-outline-primary {
   color: #013f87;
   border-color: #013f87;
+  /* mobile: center + add vertical space */
 }
 #submission-dates .btn-outline-primary:hover {
   background-color: #013f87;
   color: #fff;
+}
+@media (max-width: 600px) {
+  #submission-dates .btn-outline-primary {
+    display: block; /* stop inline behavior */
+    inline-size: fit-content; /* shrink to label width */
+    margin-inline: auto; /* center horizontally */
+    margin-block: 1.25rem; /* space above & below */
+    text-align: center;
+  }
 }
 #submission-dates table th {
   font-weight: 700;
@@ -3074,6 +3111,7 @@ body:not(.home) .navbar-toggler-icon::after {
   color: #fff;
   border: 1px solid rgba(0, 0, 0, 0.08);
   box-shadow: 0 4px 12px rgba(47, 103, 178, 0.25);
+  /* mobile: center the CTA button */
 }
 .btn-primary:hover {
   filter: brightness(1.05);
@@ -3081,6 +3119,15 @@ body:not(.home) .navbar-toggler-icon::after {
 .btn-primary:focus-visible {
   outline: 3px solid #cfe0ff;
   outline-offset: 2px;
+}
+@media (max-width: 600px) {
+  .btn-primary {
+    display: block; /* stop behaving like inline content */
+    inline-size: fit-content; /* shrink to label width */
+    margin-inline: auto; /* centers the block */
+    margin-block: 1.25rem;
+    text-align: center; /* centers the label */
+  }
 }
 
 /* Submission page: inline EasyChair URL + CTA */
@@ -3303,6 +3350,42 @@ body:not(.home) .navbar-toggler-icon::after {
   align-items: stretch;
 }
 
+/* 5-up Program Co-Chair row */
+.org-roles--grid-5 {
+  --roles-max: 1400px;
+  max-width: min(100%, var(--roles-max));
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(260px, 1fr));
+  gap: clamp(16px, 2.4vw, 28px);
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+/* Only the Program Co-Chair cards ignore the global width */
+.org-roles--grid-5 > .org-role-card--pc {
+  width: 100%; /* fill the grid track */
+  min-width: 0;
+  margin: 0;
+}
+
+/* Responsive fallbacks (optional / tweak breakpoints) */
+@media (max-width: 1100px) {
+  .org-roles--grid-5 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (max-width: 900px) {
+  .org-roles--grid-5 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 640px) {
+  .org-roles--grid-5 {
+    grid-template-columns: 1fr;
+    --roles-max: 300px;
+  }
+}
 /* fallbacks at breakpoints */
 @media (max-width: 1180px) {
   .org-roles--grid-3 {
@@ -3352,7 +3435,7 @@ body:not(.home) .navbar-toggler-icon::after {
 }
 .org-role-card .role-name {
   margin: 0 0 0.35rem;
-  font-weight: 800;
+  font-weight: 700;
   font-size: clamp(18px, 2.2vw, 22px);
   line-height: 1.25;
 }
@@ -3438,37 +3521,555 @@ body:not(.home) .navbar-toggler-icon::after {
   color: #2f3d4a;
 }
 
-/* simple two-column grid */
 .org-members.two-col {
-  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  display: grid;
+  grid-auto-flow: row;
+  grid-template-columns: fit-content(38ch) fit-content(38ch);
+  column-gap: clamp(24px, 4vw, 56px);
+  row-gap: clamp(8px, 1.2vw, 14px);
+  justify-content: center;
+  justify-items: start;
+  text-align: left;
   margin-bottom: 5rem;
 }
-
 @media (max-width: 767.98px) {
   .org-members.two-col {
     grid-template-columns: 1fr;
+    justify-content: stretch;
   }
 }
-/* refined two-column: content-sized tracks, centered block */
-/* safe two-column grid without overflow */
-ul.org-members.two-col {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr)); /* no content-based min */
-  gap: clamp(8px, 1.2vw, 14px) clamp(24px, 4vw, 56px);
-  width: 100%;
-  max-width: 100%;
-  margin-inline: auto;
-  justify-items: start;
+
+/* Make sure list items don’t force full width */
+ul.org-members.two-col li {
+  text-align: left;
+  padding-left: 5rem;
+}
+
+/* If the inner anchor was full-width, neutralize it */
+ul.org-members.two-col > li > a {
+  display: inline-block;
+  inline-size: auto;
   text-align: left;
 }
 
-/* ensure this wins on phones */
-@media (max-width: 767.98px) {
+/* Mobile: 1 column, center items + text */
+@media (max-width: 768px) {
   ul.org-members.two-col {
-    grid-template-columns: 1fr !important;
-    width: 100%;
+    grid-template-columns: 1fr;
+    justify-content: stretch; /* track fills container */
+    justify-items: center; /* items sit in the center */
+    padding-inline: clamp(12px, 4vw, 20px);
+  }
+  ul.org-members.two-col > li {
+    max-inline-size: 36ch; /* comfy line length */
+    margin-inline: auto; /* center the box */
+    text-align: center; /* center text */
+  }
+  /* if names/affils are wrapped in a link, keep it centered */
+  ul.org-members.two-col > li > a {
+    display: inline-block;
+    text-align: inherit;
+    inline-size: auto;
+  }
+  /* optional polish */
+  ul.org-members.two-col .member-name {
+    font-weight: 800;
+    display: block;
+  }
+  ul.org-members.two-col .member-affil {
+    opacity: 0.9;
   }
 }
+#tbics-keynote-detail {
+  /* ---------------------------------
+   * Conference colour system
+   * --------------------------------- */
+  --accent: #1f5ea8;
+  --tint: rgba(31, 94, 168, .18);
+  /* ---------------------------------
+   * Breadcrumb
+   * --------------------------------- */
+  /* Event line */
+  /* Main role */
+  /* Speaker name */
+  /* Responsive tuning */
+  /* ---------------------------------
+   * Background card (wraps everything)
+   * --------------------------------- */
+  /* ---------------------------------
+   * Header (transparent, sits inside card)
+   * --------------------------------- */
+  /* ---------------------------------
+   * Intro header layout
+   * --------------------------------- */
+  /* ---------------------------------
+   * Speaker main block
+   * --------------------------------- */
+  /* ---------------------------------
+   * Keynote content layout
+   * --------------------------------- */
+  /* ---------------------------------
+   * Sidebar
+   * --------------------------------- */
+}
+#tbics-keynote-detail.is-cte {
+  --accent: #1f5ea8;
+  --tint: rgba(31, 94, 168, .18);
+}
+#tbics-keynote-detail.is-ai3l {
+  --accent: #2b7c8f;
+  --tint: rgba(43, 124, 143, .18);
+}
+#tbics-keynote-detail.is-meta {
+  --accent: #c48b1e;
+  --tint: rgba(196, 139, 30, .18);
+}
+#tbics-keynote-detail.is-iclea {
+  --accent: #b24b63;
+  --tint: rgba(178, 75, 99, .18);
+}
+#tbics-keynote-detail .breadcrumb {
+  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  background: transparent;
+}
+#tbics-keynote-detail .breadcrumb a {
+  color: #345a86;
+  text-decoration: none;
+}
+#tbics-keynote-detail .breadcrumb span {
+  margin: 0 6px;
+  opacity: 0.85;
+}
+#tbics-keynote-detail .page-hero {
+  position: relative;
+  text-align: center;
+}
+#tbics-keynote-detail .hero-glass--keynote {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 48px 56px;
+  border-radius: 22px;
+  background: rgba(20, 30, 45, 0.55);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+#tbics-keynote-detail .hero-event {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 14px;
+}
+#tbics-keynote-detail .hero-title {
+  font-size: 34px;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+#tbics-keynote-detail .hero-speaker {
+  font-size: 20px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+@media (max-width: 768px) {
+  #tbics-keynote-detail .hero-glass--keynote {
+    padding: 36px 28px;
+  }
+  #tbics-keynote-detail .hero-title {
+    font-size: 26px;
+  }
+  #tbics-keynote-detail .hero-speaker {
+    font-size: 18px;
+  }
+}
+#tbics-keynote-detail .keynote-card-wrap {
+  background: linear-gradient(to bottom, #ffffff 0%, #ffffff 65%, rgba(255, 255, 255, 0.96) 100%);
+  border-radius: 28px;
+  padding: 40px 40px 44px;
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.12);
+}
+#tbics-keynote-detail .keynote-header {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  position: relative;
+  margin-bottom: 28px;
+}
+#tbics-keynote-detail .conf-tag {
+  position: absolute;
+  top: -55px;
+  left: -16px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 800;
+  padding: 10px 18px;
+  border-radius: 12px;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.15);
+}
+#tbics-keynote-detail .header-grid--intro {
+  display: block;
+}
+@media (max-width: 991px) {
+  #tbics-keynote-detail .header-grid--intro {
+    margin-top: 8px;
+  }
+}
+#tbics-keynote-detail .speaker-main {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 16px;
+  align-items: start;
+  /* Photo */
+  /* Name */
+  /* Affiliation */
+  /* Talk title */
+  /* Atmospheric fade */
+}
+@media (max-width: 991px) {
+  #tbics-keynote-detail .speaker-main {
+    grid-template-columns: 1fr;
+  }
+}
+#tbics-keynote-detail .speaker-main .speaker-text {
+  display: flex;
+  flex-direction: column;
+}
+#tbics-keynote-detail .speaker-main .speaker-photo {
+  align-self: center;
+  position: relative;
+  top: -4px;
+}
+#tbics-keynote-detail .speaker-main .speaker-photo img {
+  width: 100%;
+  max-width: 140px;
+  max-height: 170px;
+  border-radius: 18px;
+  background: #f2f5f9;
+  box-shadow: none;
+}
+#tbics-keynote-detail .speaker-main .speaker-name {
+  font-size: 30px;
+  font-weight: 800;
+  color: #153a66;
+  margin-bottom: 6px;
+}
+#tbics-keynote-detail .speaker-main .speaker-affil {
+  font-size: 15px;
+  font-weight: 700;
+  color: #6b7f99;
+  margin-bottom: 14px;
+}
+#tbics-keynote-detail .speaker-main .speaker-affil::after {
+  content: "";
+  display: block;
+  margin-top: 10px;
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(to right, transparent, rgba(107, 127, 153, 0.35), transparent);
+}
+#tbics-keynote-detail .speaker-main .talk-title {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.25;
+  margin-top: 14px;
+  padding-left: 0;
+  border-left: none;
+  color: #153a66;
+}
+#tbics-keynote-detail .speaker-main::after {
+  content: "";
+  display: block;
+  grid-column: 1/-1;
+  height: 50px;
+  background: linear-gradient(to top, rgba(21, 58, 102, 0.06), rgba(21, 58, 102, 0.03), transparent);
+}
+#tbics-keynote-detail .keynote-content {
+  margin-top: 28px;
+}
+#tbics-keynote-detail .content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  gap: 36px;
+  align-items: start;
+}
+@media (max-width: 991px) {
+  #tbics-keynote-detail .content-grid {
+    grid-template-columns: 1fr;
+  }
+}
+#tbics-keynote-detail .speaker-sidebar {
+  background: rgba(245, 249, 255, 0.9);
+  border-radius: 16px;
+  padding: 26px;
+  border: 1px solid rgba(1, 63, 135, 0.08);
+}
+#tbics-keynote-detail .speaker-sidebar h4 {
+  font-weight: 800;
+  margin-bottom: 14px;
+  color: #153a66;
+}
+#tbics-keynote-detail .speaker-sidebar p {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #345a86;
+  margin-bottom: 12px;
+}
+
+/* scss/pages/_keynote.scss */
+#tbics-keynote {
+  /* Keynote hero — shared by index + detail */
+  /* ribbon label (matches your mock) */
+  /* card */
+  /* CTA row pills (like your bottom buttons) */
+  /* CTA row (subdued, balanced) */
+  /* Color scheme: cohesive TBICS navy family */
+  /* Make the dropdown wrapper behave like the other grid items */
+  /* Dropdown menu styling (subdued, clean, TBICS-ish) */
+  /* Keep the dropdown toggle arrow subtle */
+}
+#tbics-keynote .keynote-hero .hero-glass {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 56px 56px 52px;
+  border-radius: 24px;
+  background: rgba(1, 63, 135, 0.55);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 26px 60px rgba(0, 0, 0, 0.35);
+  text-align: center;
+}
+#tbics-keynote .keynote-hero .hero-split {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+#tbics-keynote .keynote-hero .hero-split .kicker {
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+#tbics-keynote .keynote-hero .hero-split .title {
+  font-size: clamp(28px, 4vw, 42px);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff;
+}
+@media (max-width: 767px) {
+  #tbics-keynote .keynote-hero .hero-glass {
+    padding: 40px 28px;
+  }
+  #tbics-keynote .keynote-hero .hero-split .kicker {
+    font-size: 15px;
+  }
+  #tbics-keynote .keynote-hero .hero-split .title {
+    font-size: 28px;
+  }
+}
+#tbics-keynote .keynote-intro {
+  margin-bottom: 5rem;
+}
+#tbics-keynote .keynote-intro h3 {
+  font-weight: 800;
+  color: #153a66;
+}
+#tbics-keynote .keynote-intro p {
+  color: #345a86;
+  font-weight: 600;
+}
+#tbics-keynote .tbics-keynote-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+  margin-top: 24px;
+}
+@media (max-width: 767px) {
+  #tbics-keynote .tbics-keynote-grid {
+    grid-template-columns: 1fr;
+  }
+}
+#tbics-keynote .tbics-keynote-item {
+  position: relative;
+  /* conference color system */
+  --accent: #1f5ea8;
+  --tint: rgba(31, 94, 168, .18);
+}
+#tbics-keynote .tbics-keynote-item.is-cte {
+  --accent:#1f5ea8;
+  --tint:rgba(31,94,168,.18);
+}
+#tbics-keynote .tbics-keynote-item.is-ai3l {
+  --accent:#2b7c8f;
+  --tint:rgba(43,124,143,.18);
+}
+#tbics-keynote .tbics-keynote-item.is-meta {
+  --accent:#c48b1e;
+  --tint:rgba(196,139,30,.18);
+}
+#tbics-keynote .tbics-keynote-item.is-iclea {
+  --accent:#b24b63;
+  --tint:rgba(178,75,99,.18);
+}
+#tbics-keynote .conf-tag {
+  position: absolute;
+  top: -14px;
+  left: 18px;
+  z-index: 2;
+  display: inline-block;
+  padding: 10px 16px;
+  line-height: 1;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  color: #fff;
+  border-radius: 10px;
+  background: var(--accent);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+}
+#tbics-keynote .keynote-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+#tbics-keynote .keynote-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 14px;
+  padding: 34px 26px 26px;
+  border: 1px solid rgba(1, 63, 135, 0.1);
+  /* white -> tint wash like the screenshot */
+  background: linear-gradient(to bottom, #fff 0%, #fff 60%, var(--tint) 130%), #fff;
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.1);
+}
+#tbics-keynote .speaker-name {
+  font-size: 22px;
+  font-weight: 600;
+  color: #153a66;
+  margin: 0 0 10px 0;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(1, 63, 135, 0.12);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+}
+#tbics-keynote .speaker-affil {
+  margin: 0;
+  color: #345a86;
+  font-weight: 700;
+  font-size: 15px;
+}
+#tbics-keynote .tbics-cta-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  justify-content: center;
+  margin-top: 18px;
+}
+@media (max-width: 767px) {
+  #tbics-keynote .tbics-cta-row {
+    grid-template-columns: 1fr;
+  }
+}
+#tbics-keynote .tbics-cta {
+  width: 100%;
+  text-align: center;
+  border-radius: 999px;
+  padding: 16px 20px;
+  font-weight: 800;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+#tbics-keynote .tbics-cta:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 26px rgba(0, 0, 0, 0.14);
+}
+#tbics-keynote .tbics-cta--primary {
+  background: #013f87;
+  border-color: #013f87;
+  color: #fff;
+}
+#tbics-keynote .tbics-cta--primary:hover {
+  color: #fff;
+}
+#tbics-keynote .tbics-cta--soft {
+  background: rgba(1, 63, 135, 0.1);
+  border-color: rgba(1, 63, 135, 0.25);
+  color: #013f87;
+}
+#tbics-keynote .tbics-cta--soft:hover {
+  color: #013f87;
+}
+#tbics-keynote .tbics-cta--outline {
+  background: transparent;
+  border-color: rgba(1, 63, 135, 0.35);
+  color: #013f87;
+}
+#tbics-keynote .tbics-cta--outline:hover {
+  color: #013f87;
+}
+#tbics-keynote .tbics-cta-dropdown {
+  width: 100%;
+}
+#tbics-keynote .tbics-cta-dropdown .dropdown-menu {
+  width: 100%;
+  min-width: 100%;
+  border-radius: 14px;
+  border: 1px solid rgba(1, 63, 135, 0.18);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+}
+#tbics-keynote .tbics-cta-dropdown .dropdown-item {
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-weight: 700;
+  color: #013f87;
+}
+#tbics-keynote .tbics-cta-dropdown .dropdown-item:hover, #tbics-keynote .tbics-cta-dropdown .dropdown-item:focus {
+  background: rgba(1, 63, 135, 0.1);
+  color: #013f87;
+}
+#tbics-keynote .tbics-cta-dropdown .dropdown-toggle::after {
+  margin-left: 10px;
+  opacity: 0.7;
+}
+#tbics-keynote .tbics-keynote-item.is-clickable {
+  cursor: pointer;
+}
+#tbics-keynote .tbics-keynote-item.is-clickable .keynote-card {
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+}
+#tbics-keynote .tbics-keynote-item.is-clickable:hover .keynote-card {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.16);
+  border-color: var(--accent);
+}
+#tbics-keynote .tbics-keynote-item.is-clickable:hover .speaker-name {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+#tbics-keynote .keynote-cta {
+  display: inline-block;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--accent);
+  opacity: 0.85;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.tbics-keynote-item.is-clickable:hover #tbics-keynote .keynote-cta {
+  opacity: 1;
+  transform: translateX(2px);
+}
+
 .getting-here .gh-list {
   list-style: none;
   margin: 0;
@@ -3526,6 +4127,13 @@ ul.org-members.two-col {
   margin-bottom: 40px;
   /* two-row desktop layout: label over origins */
   grid-template-areas: "label   track  dest" "origins track  dest";
+  /* prevent tiny overhangs from creating a horizontal scrollbar */
+  overflow: clip;
+}
+@supports not (overflow: clip) {
+  .domestic-access.v2 .lane {
+    overflow: hidden;
+  }
 }
 .domestic-access.v2 .lane-label {
   display: contents;
@@ -3589,7 +4197,7 @@ ul.org-members.two-col {
   align-items: center;
   column-gap: 16px;
   position: relative; /* badges float above */
-  overflow: visible; /* bus arrow can extend */
+  overflow: visible; /* desktop: allow small overlaps inside lane (lane itself clips) */
 }
 .domestic-access.v2 .step {
   color: #fff;
@@ -3628,7 +4236,7 @@ ul.org-members.two-col {
 .domestic-access.v2 .lane-arrow::after {
   content: "";
   position: absolute;
-  right: -12px;
+  right: -10px; /* trimmed from -12px to avoid overshoot */
   top: 50%;
   transform: translateY(-50%);
   border-left: 14px solid var(--lane-color);
@@ -3654,6 +4262,7 @@ ul.org-members.two-col {
   font-size: 0.85rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
   white-space: nowrap;
+  max-inline-size: none;
   z-index: 3;
   pointer-events: none;
 }
@@ -3674,6 +4283,7 @@ ul.org-members.two-col {
 }
 .domestic-access.v2 .lane.bus .leg.to-dest .lane-arrow {
   width: calc(100% + var(--grid-gap) + var(--dest-col) - var(--dest-clearance)) !important;
+  max-width: 100%; /* guard: never exceed lane box */
   background: var(--bus);
 }
 .domestic-access.v2 .lane.bus .leg.to-dest .lane-arrow::after {
@@ -3695,6 +4305,7 @@ ul.org-members.two-col {
     grid-template-columns: 1fr;
     grid-auto-rows: auto;
     row-gap: 12px;
+    overflow: hidden; /* strict on mobile */
   }
   .domestic-access.v2 .step {
     min-width: 0;
@@ -3753,6 +4364,7 @@ ul.org-members.two-col {
     position: static;
     margin: 6px auto 0;
     transform: none;
+    max-inline-size: 100%;
   }
 }
 /* ------------------------------------- */
@@ -3843,6 +4455,53 @@ ul.org-members.two-col {
     height: 72px !important;
   }
 }
+/* =========================
+   Venue: mobile image sizing
+   Only affects <=600px and only the three targets we chose
+   ========================= */
+@media (max-width: 600px) {
+  /* 1) Venue overview (left column image) */
+  #venue .row .col-md-5 img.img-fluid.rounded.shadow-sm {
+    display: block;
+    inline-size: min(92vw, 270px); /* cap width on small screens */
+    block-size: auto;
+    margin-inline: auto; /* center the image */
+  }
+  /* 2) Gutenberg gallery (the Venue Overview gallery in .wp-content) */
+  #venue .wp-content .wp-block-gallery.is-layout-flex.has-nested-images.is-cropped {
+    gap: 12px;
+    justify-content: center;
+  }
+  #venue .wp-content .wp-block-gallery.is-layout-flex.has-nested-images.is-cropped > .wp-block-image {
+    margin: 0;
+  }
+  #venue .wp-content .wp-block-gallery.is-layout-flex.has-nested-images.is-cropped > .wp-block-image > img {
+    display: block;
+    inline-size: min(92vw, 300px);
+    block-size: auto;
+    margin-inline: auto;
+    border-radius: 10px;
+  }
+  /* 3) Discover Kumamoto “paws-title” galleries (dk-gallery) — 2-up grid */
+  #venue .dk-content .wp-block-gallery.is-layout-flex.has-nested-images.is-cropped.dk-gallery {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    justify-items: center;
+  }
+  #venue .dk-content .wp-block-gallery.is-layout-flex.has-nested-images.is-cropped.dk-gallery > .wp-block-image {
+    margin: 0;
+  }
+  #venue .dk-content .wp-block-gallery.is-layout-flex.has-nested-images.is-cropped.dk-gallery > .wp-block-image > img {
+    inline-size: 100%;
+    aspect-ratio: 4/3; /* pick 1/1, 3/2, 16/9 if you prefer */
+    object-fit: cover;
+    border-radius: 10px;
+  }
+}
+/* (Optional) TEMP DIAG: uncomment to confirm overflow source, then remove
+#venue{ overflow-x: clip; } @supports not (overflow: clip){ #venue{ overflow-x: hidden; } }
+*/
 /* ICLEA 2026 CFP page — make inline links unmistakably clickable */
 #cfp-iclea {
   /* Paragraph & list links (exclude buttons) */

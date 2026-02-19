@@ -17,6 +17,8 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
 ?>
 
 <main id="submission-dates" class="tbics-page site-main" role="main">
+<!-- Urgent Deadline Banner -->
+
 
   <!-- Hero -->
   <section class="page-hero page-hero-banner" style="background-image: url('<?php echo esc_url($bg_image); ?>');">
@@ -35,6 +37,89 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
     <div class="<?php echo esc_attr($container); ?>">
       <div class="row justify-content-center">
         <div class="col-lg-9">
+        <?php
+  // Use WordPress timezone (Asia/Tokyo from admin)
+  $tz = wp_timezone();
+
+  // Deadline date (end of day JST)
+  $deadline = new DateTime('2026-02-27 23:59:59', $tz);
+  $now = new DateTime('now', $tz);
+
+  // Count full days remaining (date-based, not seconds-based)
+  $today = new DateTime('today', $tz);
+  $deadline_day = new DateTime('2026-02-27', $tz);
+  $days_left = max(0, $today->diff($deadline_day)->days);
+
+  // Only show if deadline hasn't passed
+  if ($now < $deadline):
+?>
+  <div class="deadline-alert-banner" role="alert" aria-live="polite">
+    <div class="<?php echo esc_attr($container); ?>">
+      <div class="alert alert-warning mb-0 py-3 text-center border-0 rounded-0"
+           style="background-color: #fff3cd; border-left: 4px solid #ff9800 !important;">
+        <strong style="font-size: 1.1em;">
+          ⚠️ Paper Submission Deadline: 27 February 2026, 23:59 (JST)
+        </strong>
+        <span class="ms-2" style="font-size: 1em;">
+          <?php if ($days_left > 1): ?>
+            (<?php echo $days_left; ?> days remaining)
+          <?php elseif ($days_left === 1): ?>
+            (Final day!)
+          <?php else: ?>
+            (Deadline today!)
+          <?php endif; ?>
+        </span>
+      </div>
+    </div>
+  </div>
+<?php endif; ?>
+
+
+  <!-- 3) Formatting -->
+  <section aria-labelledby="sec-formatting" class="mb-5">
+        <h2 id="sec-formatting" class="section-title">Formatting &amp; Template</h2>
+        <p>Please format your submission using the official paper template.</p><br>
+        <div class="text-center">
+        <a class="btn btn-outline-primary me-2 mb-2"
+            href="https://eds.let.media.kyoto-u.ac.jp/TBICS2026/wp-content/uploads/2025/10/TBICS2026-PaperTemplate_.docx"
+            target="_blank"
+            rel="noopener">
+          Download Paper Template (Word)
+        </a>
+          </div>
+      </section>
+         <!-- 4) Submission System -->
+         <section aria-labelledby="sec-submission" class="mb-5">
+              <p class="mb-2">
+              Submit your paper via the online system:
+              
+              <a class="inline-url"
+                href="https://easychair.org/conferences/?conf=tbics2026"
+                target="_blank" rel="noopener">
+                https://easychair.org/conferences/?conf=tbics2026
+              </a>.
+              
+            </p>
+            <br>
+            <div class="submission-cta mt-2 justify-content-center">
+            <div class="text-center">
+              <a class="btn btn-primary"
+                href="https://easychair.org/conferences/?conf=tbics2026"
+                target="_blank" rel="noopener"
+                aria-label="Open the TBICS 2026 EasyChair submission system (opens in a new tab)">
+                Open Submission System
+              </a>
+              </div>
+            </div>
+              <ul class="mt-4">
+              <li>
+                Questions about submissions should be emailed to the PC Chair of the relevant track.
+              </li>
+              <li>
+              Other questions related to local information should be emailed to <a href="mailto:tbics2026@gmail.com?subject=TBICS%202026%20Local%20Info%20Inquiry">tbics2026@gmail.com</a>
+              </li>
+              </ul>
+          </section>
 
           <!-- 1) Submission Paper Types -->
           <section aria-labelledby="sec-types" class="mb-5">
@@ -53,12 +138,12 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
                   <tr>
                     <td><strong>Full paper</strong></td>
                     <td>6 pages</td>
-                    <td>Oral or Poster</td>
+                    <td>Oral only</td>
                   </tr>
                   <tr>
                     <td><strong>Short paper</strong></td>
                     <td>4 pages</td>
-                    <td>Oral or Poster</td>
+                    <td>Oral only</td>
                   </tr>
                   <tr>
                     <td><strong>Poster</strong></td>
@@ -95,46 +180,9 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
             <p class="mb-0">All submissions will undergo a <strong>single-blind</strong> review process, as in ICCE conferences.</p>
           </section>
 
-          <!-- 3) Formatting -->
-          <section aria-labelledby="sec-formatting" class="mb-5">
-            <h2 id="sec-formatting" class="section-title">Formatting &amp; Template</h2>
-            <p>Please format your submission using the official paper template.</p>
-            <a class="btn btn-outline-primary me-2 mb-2"
-               href="https://eds.let.media.kyoto-u.ac.jp/TBICS2026/wp-content/uploads/2025/10/TBICS2026-PaperTemplate_.docx"
-               target="_blank"
-               rel="noopener">
-              Download Paper Template (Word)
-            </a>
-          </section>
+          
 
-          <!-- 4) Submission System -->
-          <section aria-labelledby="sec-submission" class="mb-5">
-              <p class="mb-2">
-              Submit your paper via the online system:
-              <a class="inline-url"
-                href="https://easychair.org/conferences/?conf=tbics2026"
-                target="_blank" rel="noopener">
-                https://easychair.org/conferences/?conf=tbics2026
-              </a>.
-            </p>
-
-            <div class="submission-cta mt-2">
-              <a class="btn btn-primary"
-                href="https://easychair.org/conferences/?conf=tbics2026"
-                target="_blank" rel="noopener"
-                aria-label="Open the TBICS 2026 EasyChair submission system (opens in a new tab)">
-                Open Submission System
-              </a>
-            </div>
-              <ul class="mt-4">
-              <li>
-                Questions about submissions should be emailed to the PC Chair of the relevant track.
-              </li>
-              <li>
-              Other questions related to local information should be emailed to <a href="mailto:tbics2026@gmail.com?subject=TBICS%202026%20Local%20Info%20Inquiry">tbics2026@gmail.com</a>
-              </li>
-              </ul>
-          </section>
+ 
 
           <!-- 5) Publication -->
           <section aria-labelledby="sec-publication" class="mb-5">
@@ -149,11 +197,11 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
           <section aria-labelledby="sec-dates" class="mb-5">
             <h2 id="sec-dates" class="section-title">Important Dates</h2>
             <ul class="tbics-dates-list">
-              <li><strong>Submission deadline:</strong> February 15, 2026</li>
-              <li><strong>Notification to authors:</strong> March 15, 2026</li>
-              <li><strong>Camera-ready submission deadline:</strong> April 15, 2026</li>
-              <li><strong>Author registration deadline:</strong> April 15, 2026</li>
-              <li><strong>Early-bird registration deadline:</strong> April 15, 2026</li>
+              <li><strong>Submission deadline:</strong> February 27, 2026, 23:59 (JST)</li>
+              <li><strong>Notification to authors:</strong> March 27, 2026</li>
+              <li><strong>Camera-ready submission deadline:</strong> April 30, 2026, 23:59 (JST)</li>
+              <li><strong>Author registration deadline:</strong> April 30, 2026, 23:59 (JST)</li>
+              <li><strong>Early-bird registration deadline:</strong> April 30, 2026, 23:59 (JST)</li>
               <li><strong>Conference date:</strong> June 25–27, 2026</li>
             </ul>
           </section>

@@ -27,7 +27,16 @@
         background-color: #013f87;
         color: #fff;
       }
+      /* mobile: center + add vertical space */
+      @media (max-width: 600px){
+          display: block;               /* stop inline behavior */
+          inline-size: fit-content;     /* shrink to label width */
+          margin-inline: auto;          /* center horizontally */
+          margin-block: 1.25rem;        /* space above & below */
+          text-align: center;
+        }
     }
+    
   
     /* simple emphasis on header cells if native table is used */
     table th { font-weight: 700; }
@@ -275,7 +284,17 @@
   
     &:hover { filter: brightness(1.05); }
     &:focus-visible { outline: 3px solid #cfe0ff; outline-offset: 2px; }
+    /* mobile: center the CTA button */
+    @media (max-width: 600px){
+      
+        display: block;                 /* stop behaving like inline content */
+        inline-size: fit-content;       /* shrink to label width */
+        margin-inline: auto;            /* centers the block */
+        margin-block: 1.25rem; 
+        text-align: center;             /* centers the label */
+      }
   }
+  
   
 /* Submission page: inline EasyChair URL + CTA */
 .inline-url {

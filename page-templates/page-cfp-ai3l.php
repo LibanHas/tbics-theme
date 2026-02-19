@@ -19,7 +19,7 @@ $bg_image = get_field('hero_background') ?: '/TBICS2026/wp-content/uploads/2025/
 $brand_modifier = 'is-ai3l';
 
 // Optional subline in the hero (you can set ACF “hero_lead”; fallback shows former name)
-$hero_lead = get_field('hero_lead') ?: 'Formerly ICFULL';
+$hero_lead = get_field('hero_lead') ?: 'Transcending Language Learning in the Age of AI: Toward Personalization, Automation, and Immersive Experiences';
 ?>
 <main id="cfp-ai3l" class="tbics-page site-main is-ai3l" role="main">
 
@@ -172,6 +172,12 @@ $hero_lead = get_field('hero_lead') ?: 'Formerly ICFULL';
                 <p class="role-affil">Beijing Univ. of Posts &amp; Telecommunications, China</p>
               </article>
             </div>
+            <?php // NEW: Link to full Program Committee members page ?>
+            <div class="text-center mt-5 mb-4">
+              <a class="btn-brand" href="<?php echo esc_url( home_url( '/ai3l-2026-program-committee/' ) ); ?>">
+                AI3L 2026 Program Committee (PC) members
+              </a>
+        </div>
           </section>
 
           <!-- Steering Committee -->

@@ -1,0 +1,276 @@
+#tbics-keynote-detail {
+
+    /* ---------------------------------
+     * Conference colour system
+     * --------------------------------- */
+    --accent: #1f5ea8;
+    --tint: rgba(31, 94, 168, .18);
+  
+    &.is-cte   { --accent: #1f5ea8; --tint: rgba(31, 94, 168, .18); }
+    &.is-ai3l  { --accent: #2b7c8f; --tint: rgba(43, 124, 143, .18); }
+    &.is-meta  { --accent: #c48b1e; --tint: rgba(196, 139, 30, .18); }
+    &.is-iclea { --accent: #b24b63; --tint: rgba(178, 75, 99, .18); }
+  
+    /* ---------------------------------
+     * Breadcrumb
+     * --------------------------------- */
+    .breadcrumb {
+      margin-bottom: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      background: transparent;
+  
+      a {
+        color: #345a86;
+        text-decoration: none;
+      }
+  
+      span {
+        margin: 0 6px;
+        opacity: .85;
+      }
+    }
+
+    .page-hero {
+        position: relative;
+        text-align: center;
+      }
+      
+      .hero-glass--keynote {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 48px 56px;
+        border-radius: 22px;
+      
+        background: rgba(20, 30, 45, 0.55);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+      
+        box-shadow: 0 24px 60px rgba(0,0,0,.35);
+        text-align: center;
+      }
+      
+      /* Event line */
+      .hero-event {
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+        opacity: .85;
+        margin-bottom: 14px;
+      }
+      
+      /* Main role */
+      .hero-title {
+        font-size: 34px;
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 10px;
+      }
+      
+      /* Speaker name */
+      .hero-speaker {
+        font-size: 20px;
+        font-weight: 600;
+        opacity: .9;
+      }
+      
+      /* Responsive tuning */
+      @media (max-width: 768px) {
+        .hero-glass--keynote {
+          padding: 36px 28px;
+        }
+      
+        .hero-title {
+          font-size: 26px;
+        }
+      
+        .hero-speaker {
+          font-size: 18px;
+        }
+      }
+      
+  
+    /* ---------------------------------
+     * Background card (wraps everything)
+     * --------------------------------- */
+    .keynote-card-wrap {
+      background: linear-gradient(
+        to bottom,
+        #ffffff 0%,
+        #ffffff 65%,
+        rgba(255,255,255,0.96) 100%
+      );
+      border-radius: 28px;
+      padding: 40px 40px 44px;
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.12);
+    }
+  
+    /* ---------------------------------
+     * Header (transparent, sits inside card)
+     * --------------------------------- */
+    .keynote-header {
+      background: none;
+      border-radius: 0;
+      padding: 0;
+      box-shadow: none;
+      position: relative;
+      margin-bottom: 28px;
+    }
+  
+    .conf-tag {
+      position: absolute;
+      top: -55px;
+      left: -16px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 800;
+      padding: 10px 18px;
+      border-radius: 12px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.15);
+    }
+  
+    /* ---------------------------------
+     * Intro header layout
+     * --------------------------------- */
+    .header-grid--intro {
+      display: block;
+  
+      @media (max-width: 991px) {
+        margin-top: 8px;
+      }
+    }
+  
+    /* ---------------------------------
+     * Speaker main block
+     * --------------------------------- */
+    .speaker-main {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 16px;
+      align-items: start;
+  
+      @media (max-width: 991px) {
+        grid-template-columns: 1fr;
+      }
+  
+      .speaker-text {
+        display: flex;
+        flex-direction: column;
+      }
+  
+      /* Photo */
+      .speaker-photo {
+        align-self: center;
+        position: relative;
+        top: -4px;
+  
+        img {
+          width: 100%;
+          max-width: 140px;
+          max-height: 170px;
+          border-radius: 18px;
+          background: #f2f5f9;
+          box-shadow: none;
+        }
+      }
+  
+      /* Name */
+      .speaker-name {
+        font-size: 30px;
+        font-weight: 800;
+        color: #153a66;
+        margin-bottom: 6px;
+      }
+  
+      /* Affiliation */
+      .speaker-affil {
+        font-size: 15px;
+        font-weight: 700;
+        color: #6b7f99;
+        margin-bottom: 14px;
+  
+        &::after {
+          content: "";
+          display: block;
+          margin-top: 10px;
+          height: 1px;
+          width: 100%;
+          background: linear-gradient(
+            to right,
+            transparent,
+            rgba(107, 127, 153, 0.35),
+            transparent
+          );
+        }
+      }
+  
+      /* Talk title */
+      .talk-title {
+        font-size: 28px;
+        font-weight: 800;
+        line-height: 1.25;
+        margin-top: 14px;
+        padding-left: 0;
+        border-left: none;
+        color: #153a66;
+      }
+  
+      /* Atmospheric fade */
+      &::after {
+        content: "";
+        display: block;
+        grid-column: 1 / -1;
+        height: 50px;
+        background: linear-gradient(
+          to top,
+          rgba(21, 58, 102, 0.06),
+          rgba(21, 58, 102, 0.03),
+          transparent
+        );
+      }
+    }
+  
+    /* ---------------------------------
+     * Keynote content layout
+     * --------------------------------- */
+    .keynote-content {
+      margin-top: 28px;
+    }
+  
+    .content-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      gap: 36px;
+      align-items: start;
+  
+      @media (max-width: 991px) {
+        grid-template-columns: 1fr;
+      }
+    }
+  
+    /* ---------------------------------
+     * Sidebar
+     * --------------------------------- */
+    .speaker-sidebar {
+      background: rgba(245, 249, 255, 0.9);
+      border-radius: 16px;
+      padding: 26px;
+      border: 1px solid rgba(1,63,135,.08);
+  
+      h4 {
+        font-weight: 800;
+        margin-bottom: 14px;
+        color: #153a66;
+      }
+  
+      p {
+        font-size: 14px;
+        font-weight: 600;
+        line-height: 1.6;
+        color: #345a86;
+        margin-bottom: 12px;
+      }
+    }
+  }
+  

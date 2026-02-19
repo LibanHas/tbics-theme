@@ -87,3 +87,36 @@ add_action('wp_enqueue_scripts', function () {
 	wp_script_add_data($handle, 'defer', true);
   });
   
+
+  add_action('wp_enqueue_scripts', function () {
+
+	// ✅ Bootstrap bundle (includes Popper) for dropdowns
+	wp_enqueue_script(
+	  'tbics-bootstrap-bundle',
+	  get_stylesheet_directory_uri() . '/assets/js/bootstrap.bundle.min.js',
+	  array(),
+	  null,
+	  true
+	);
+  
+  }, 20);
+  
+
+  function tbics_register_keynote_cpt() {
+	register_post_type('keynote', [
+	  'labels' => [
+		'name' => 'Keynotes',
+		'singular_name' => 'Keynote',
+	  ],
+	  'public' => true,
+	  'has_archive' => true,
+	  'rewrite' => [
+		'slug' => 'TBICS2026/keynote',
+		'with_front' => false,
+	  ],
+	  'supports' => ['title', 'editor', 'thumbnail'],
+	  'show_in_rest' => true,
+	]);
+  }
+  add_action('init', 'tbics_register_keynote_cpt');
+  
